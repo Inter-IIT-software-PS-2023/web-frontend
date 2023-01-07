@@ -38,9 +38,14 @@ const Map = () => {
 			collapsed: true,
 		})
 
-		const marker = new mapboxgl.Marker({
-			color: '#011f4b',
-		})
+		// const marker = new mapboxgl.Marker({
+		// 	color: '#011f4b',
+		// })
+		const el = document.createElement('div')
+		el.className = 'marker'
+		el.classList.add('marker')
+		// make a marker for each feature and add to the map
+		const marker = new mapboxgl.Marker(el)
 
 		const draw = new MapboxDraw({
 			displayControlsDefault: false,
@@ -117,9 +122,8 @@ const Map = () => {
 				return
 			}
 			const coords = response.matchings[0].geometry
-
+            console.log(coords)
 			// getInstructions(response.matchings[0])
-
 			// animation for marker motion
 			const route = {
 				type: 'FeatureCollection',
@@ -150,7 +154,6 @@ const Map = () => {
 			function animate() {
 				marker.setLngLat(route.features[0].geometry.coordinates[counter])
 				counter = counter + 1
-				// Request the next frame of animation as long as the end has not been reached
 				if (counter < steps) {
 					requestAnimationFrame(animate)
 				} else {
