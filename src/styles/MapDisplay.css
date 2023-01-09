@@ -18,3 +18,8 @@
     overflow-y: scroll;
     z-index: 999999;
 }
+
+.theme {
+    z-index: 99999999;
+    position: relative;
+}

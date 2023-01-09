@@ -9,6 +9,8 @@ import '../styles/Marker.css'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import { length, along } from '@turf/turf'
+import { Theme } from '../store/features/themeToggle/ToggleTheme'
+// import sessionStorage from 'redux-persist/es/storage/session'
 const Map = () => {
 	// const MapboxDirections = require('@mapbox/mapbox-gl-directions');
 	const map: any = useRef(null)
@@ -16,12 +18,14 @@ const Map = () => {
 	const [lat, setLat] = useState(80.3319)
 	const [lng, setLng] = useState(26.4499)
 	const [zoom, setZoom] = useState(15)
+	const [theme, setTheme] = useState(JSON.parse(sessionStorage.getItem("persist:root")!)?.value)
 	useEffect(() => {
 		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
+		const url = JSON.parse(sessionStorage.getItem("persist:root")!)?.value;
 		if (map.current) return
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current || '',
-			style: 'mapbox://styles/mapbox/streets-v12',
+			style: theme,
 			center: [lat, lng],
 			zoom: zoom,
 		})
@@ -122,7 +126,7 @@ const Map = () => {
 				return
 			}
 			const coords = response.matchings[0].geometry
-            console.log(coords)
+			console.log(coords)
 			// getInstructions(response.matchings[0])
 			// animation for marker motion
 			const route = {
@@ -168,7 +172,7 @@ const Map = () => {
 				) {
 					return bounds.extend(coord)
 				},
-				new mapboxgl.LngLatBounds(coords[0], coords[0]))
+					new mapboxgl.LngLatBounds(coords[0], coords[0]))
 				map.fitBounds(bounds, {
 					padding: 30,
 				})
@@ -231,15 +235,21 @@ const Map = () => {
 		map.current.on('draw.create', updateRoute)
 		map.current.on('draw.update', updateRoute)
 		map.current.on('draw.delete', removeRoute)
-	})
+	}, [theme]);
+
 	return (
 		<>
+			<div className='theme' onClick={() => {
+				setTheme(JSON.parse(sessionStorage.getItem("persist:root")!)?.value)
+				console.log(typeof JSON.parse(sessionStorage.getItem("persist:root")!)?.value)
+			}}><Theme /></div>
 			<div style={{ maxHeight: 'calc(100vh)', overflow: 'hidden' }}>
 				<div
 					ref={mapContainer}
 					className='map.current-container'
 					style={{ height: '100vh' }}
 				>
+
 					{/* <div className='info-box'>
 						<p>
 							Draw your route using the draw tools on the right. To get the most
