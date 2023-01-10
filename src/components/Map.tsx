@@ -37,7 +37,6 @@ const Map = () => {
 			mapboxgl: mapboxgl,
 			collapsed: true,
 		})
-
 		// const marker = new mapboxgl.Marker({
 		// 	color: '#011f4b',
 		// })
@@ -100,7 +99,6 @@ const Map = () => {
 				},
 			],
 		})
-
 		function updateRoute() {
 			removeRoute()
 			const profile = 'driving'
@@ -122,7 +120,7 @@ const Map = () => {
 				return
 			}
 			const coords = response.matchings[0].geometry
-            console.log(coords)
+			console.log(coords)
 			// getInstructions(response.matchings[0])
 			// animation for marker motion
 			const route = {
@@ -234,7 +232,7 @@ const Map = () => {
 	})
 	return (
 		<>
-			<div style={{ maxHeight: 'calc(100vh)', overflow: 'hidden' }}>
+			<div>
 				<div
 					ref={mapContainer}
 					className='map.current-container'
