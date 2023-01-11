@@ -1,18 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useState, useEffect } from 'react'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
-import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import '../styles/MapDisplay.css'
-import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder'
-import '../styles/Marker.css'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
-import MapboxDraw from '@mapbox/mapbox-gl-draw'
+import '../styles/MapDisplay.css'
+import '../styles/Marker.css'
+import { Button } from '@mui/material'
+import mapboxgl from 'mapbox-gl'
+import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import { length, along } from '@turf/turf'
+import { addRoute, draw, getInstructions } from '../services/mapServices'
+import LightbulbIcon from '@mui/icons-material/Lightbulb'
 const Map = () => {
-	// const MapboxDirections = require('@mapbox/mapbox-gl-directions');
 	const map: any = useRef(null)
+	const [open, setOpen] = useState(false)
+	const handleModal = () => setOpen(!open)
 	const mapContainer = useRef<HTMLDivElement>(null)
+	const directionContainer = useRef<HTMLDivElement>(null)
 	const [lat, setLat] = useState(80.3319)
 	const [lng, setLng] = useState(26.4499)
 	const [zoom, setZoom] = useState(15)
@@ -37,68 +41,13 @@ const Map = () => {
 			mapboxgl: mapboxgl,
 			collapsed: true,
 		})
-		// const marker = new mapboxgl.Marker({
-		// 	color: '#011f4b',
-		// })
+
+		// Rider Marker
 		const el = document.createElement('div')
 		el.className = 'marker'
 		el.classList.add('marker')
-		// make a marker for each feature and add to the map
 		const marker = new mapboxgl.Marker(el)
 
-		const draw = new MapboxDraw({
-			displayControlsDefault: false,
-			controls: {
-				line_string: true,
-				trash: true,
-			},
-			defaultMode: 'draw_line_string',
-			styles: [
-				{
-					id: 'gl-draw-line',
-					type: 'line',
-					filter: ['all', ['==', '$type', 'LineString'], ['!=', 'mode', 'static']],
-					layout: {
-						'line-cap': 'round',
-						'line-join': 'round',
-					},
-					paint: {
-						'line-color': '#011f4b',
-						'line-dasharray': [0.2, 2],
-						'line-width': 2,
-						'line-opacity': 0.7,
-					},
-				},
-				{
-					id: 'gl-draw-polygon-and-line-vertex-halo-active',
-					type: 'circle',
-					filter: [
-						'all',
-						['==', 'meta', 'vertex'],
-						['==', '$type', 'Point'],
-						['!=', 'mode', 'static'],
-					],
-					paint: {
-						'circle-radius': 12,
-						'circle-color': '#FFF',
-					},
-				},
-				{
-					id: 'gl-draw-polygon-and-line-vertex-active',
-					type: 'circle',
-					filter: [
-						'all',
-						['==', 'meta', 'vertex'],
-						['==', '$type', 'Point'],
-						['!=', 'mode', 'static'],
-					],
-					paint: {
-						'circle-radius': 8,
-						'circle-color': '#011f4b',
-					},
-				},
-			],
-		})
 		function updateRoute() {
 			removeRoute()
 			const profile = 'driving'
@@ -120,8 +69,8 @@ const Map = () => {
 				return
 			}
 			const coords = response.matchings[0].geometry
-			console.log(coords)
-			// getInstructions(response.matchings[0])
+			console.log(response.matchings[0])
+			getInstructions(response.matchings[0], directionContainer.current)
 			// animation for marker motion
 			const route = {
 				type: 'FeatureCollection',
@@ -144,7 +93,7 @@ const Map = () => {
 			}
 			route.features[0].geometry.coordinates = arc
 			let counter = 0
-			addRoute(coords)
+			addRoute(map.current, coords)
 			fitMap(map.current, coords.coordinates)
 			marker
 				.setLngLat(route.features[0].geometry.coordinates[0])
@@ -173,49 +122,6 @@ const Map = () => {
 			}
 		}
 
-		// function getInstructions(data: { legs: any; duration: number }) {
-		// 	const directions = document.getElementById('directions')
-		// 	let tripDirections = ''
-		// 	for (const leg of data.legs) {
-		// 		const steps = leg.steps
-		// 		for (const step of steps) {
-		// 			tripDirections += `<li>${step.maneuver.instruction}</li>`
-		// 		}
-		// 	}
-		// 	directions!.innerHTML = `<p><strong>Trip duration: ${Math.floor(
-		// 		data.duration / 60
-		// 	)} min.</strong></p><ol>${tripDirections}</ol>`
-		// }
-
-		function addRoute(coords: any) {
-			if (map.current.getSource('route')) {
-				map.current.removeLayer('route')
-				map.current.removeSource('route')
-			} else {
-				map.current.addLayer({
-					id: 'route',
-					type: 'line',
-					source: {
-						type: 'geojson',
-						data: {
-							type: 'Feature',
-							properties: {},
-							geometry: coords,
-						},
-					},
-					layout: {
-						'line-join': 'round',
-						'line-cap': 'round',
-					},
-					paint: {
-						'line-color': '#011f4b',
-						'line-width': 8,
-						'line-opacity': 0.8,
-					},
-				})
-			}
-		}
-
 		function removeRoute() {
 			if (!map.current.getSource('route')) return
 			map.current.removeLayer('route')
@@ -238,15 +144,33 @@ const Map = () => {
 					className='map.current-container'
 					style={{ height: '100vh' }}
 				>
-					{/* <div className='info-box'>
-						<p>
-							Draw your route using the draw tools on the right. To get the most
-							accurate route match, draw points at regular intervals.
-						</p>
-						<div id='directions'></div>
-					</div> */}
+					<Button
+						variant='contained'
+						sx={{
+							borderRadius: '50%',
+							height: '60px',
+							position: 'absolute',
+							bottom: '10px',
+							right: '0',
+							zIndex: '3',
+							backgroundColor: 'white',
+							color: 'black',
+							boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
+							'&:hover': {
+								backgroundColor: 'white',
+								boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
+							},
+						}}
+						onClick={handleModal}
+					>
+						<LightbulbIcon />
+					</Button>
+					<div className='info-box'>
+						<div ref={directionContainer}></div>
+					</div>
 				</div>
 			</div>
+			{/* <DrivingModal open={open} handleModal={handleModal} /> */}
 		</>
 	)
 }
