@@ -1,11 +1,16 @@
 import './App.css'
 import Map from './components/Map'
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 function App() {
 	return (
-		<div className='App'>
-			<Map />
-		</div>
+		<>
+			<BrowserRouter>
+				<Routes>
+
+					<Route path='/' element={<Map />}></Route>
+				</Routes>
+			</BrowserRouter></>
+
 	)
 }
 

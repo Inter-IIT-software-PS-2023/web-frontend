@@ -10,6 +10,8 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import { length, along } from '@turf/turf'
 import { Theme } from '../store/features/themeToggle/ToggleTheme'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/app/Store'
 // import sessionStorage from 'redux-persist/es/storage/session'
 const Map = () => {
 	// const MapboxDirections = require('@mapbox/mapbox-gl-directions');
@@ -18,7 +20,7 @@ const Map = () => {
 	const [lat, setLat] = useState(80.3319)
 	const [lng, setLng] = useState(26.4499)
 	const [zoom, setZoom] = useState(15)
-	const [theme, setTheme] = useState(JSON.parse(sessionStorage.getItem("persist:root")!)?.value)
+	const [theme, setTheme] = useState(useSelector((state: RootState) => state.theme.value))
 	useEffect(() => {
 		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
 		const url = JSON.parse(sessionStorage.getItem("persist:root")!)?.value;
@@ -235,13 +237,14 @@ const Map = () => {
 		map.current.on('draw.create', updateRoute)
 		map.current.on('draw.update', updateRoute)
 		map.current.on('draw.delete', removeRoute)
-	}, [theme]);
+	}, [useSelector((state: RootState) => state.theme.value)]);
 
 	return (
 		<>
 			<div className='theme' onClick={() => {
-				setTheme(JSON.parse(sessionStorage.getItem("persist:root")!)?.value)
-				console.log(typeof JSON.parse(sessionStorage.getItem("persist:root")!)?.value)
+				setTheme(useSelector((state: RootState) => state.theme.value))
+				console.log(useSelector((state: RootState) => state.theme.value))
+
 			}}><Theme /></div>
 			<div style={{ maxHeight: 'calc(100vh)', overflow: 'hidden' }}>
 				<div

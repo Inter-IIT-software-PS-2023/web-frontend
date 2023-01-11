@@ -1,5 +1,5 @@
 import React from 'react'
-import type { RootState } from '../../store/app/Store'
+import type { RootState } from '../../app/Store'
 import { useSelector, useDispatch } from 'react-redux'
 import { satellite, streets } from './Toggle'
 
@@ -15,7 +15,6 @@ export function Theme() {
                 >
                     Streets
                 </button>
-                <span>{count}</span>
                 <button
                     aria-label="Decrement value"
                     onClick={() => dispatch(satellite())}
