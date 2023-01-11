@@ -1,16 +1,16 @@
-import './App.css'
 import Map from './components/Map'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router'
+import SidebarMenu from './components/Sidebar'
 function App() {
 	return (
-		<>
-			<BrowserRouter>
+		<div style={{ height: '100vh' }}>
+			<SidebarMenu />
+			<>
 				<Routes>
-
-					<Route path='/' element={<Map />}></Route>
+					<Route path='/map' element={<Map />} />
 				</Routes>
-			</BrowserRouter></>
-
+			</>
+		</div>
 	)
 }
 

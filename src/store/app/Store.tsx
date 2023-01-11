@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
 import themeReducer from '../../store/features/themeToggle/Toggle'
-import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 import sessionStorage from 'redux-persist/lib/storage/session'
