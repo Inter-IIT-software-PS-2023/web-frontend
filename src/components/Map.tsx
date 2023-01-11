@@ -9,6 +9,10 @@ import { Button } from '@mui/material'
 import mapboxgl from 'mapbox-gl'
 import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import { length, along } from '@turf/turf'
+import { Theme } from '../store/features/themeToggle/ToggleTheme'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/app/Store'
+// import sessionStorage from 'redux-persist/es/storage/session'
 import { addRoute, draw, getInstructions } from '../services/mapServices'
 import LightbulbIcon from '@mui/icons-material/Lightbulb'
 const Map = () => {
@@ -20,12 +24,14 @@ const Map = () => {
 	const [lat, setLat] = useState(80.3319)
 	const [lng, setLng] = useState(26.4499)
 	const [zoom, setZoom] = useState(15)
+	const [theme, setTheme] = useState(useSelector((state: RootState) => state?.theme?.value))
 	useEffect(() => {
 		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
+		// const url = JSON.parse(sessionStorage.getItem("persist:root")!)?.value;
 		if (map.current) return
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current || '',
-			style: 'mapbox://styles/mapbox/streets-v12',
+			style: theme,
 			center: [lat, lng],
 			zoom: zoom,
 		})
@@ -115,7 +121,7 @@ const Map = () => {
 				) {
 					return bounds.extend(coord)
 				},
-				new mapboxgl.LngLatBounds(coords[0], coords[0]))
+					new mapboxgl.LngLatBounds(coords[0], coords[0]))
 				map.fitBounds(bounds, {
 					padding: 30,
 				})
@@ -135,10 +141,20 @@ const Map = () => {
 		map.current.on('draw.create', updateRoute)
 		map.current.on('draw.update', updateRoute)
 		map.current.on('draw.delete', removeRoute)
-	})
+	}, [useSelector((state: RootState) => state.theme.value)]);
+
 	return (
 		<>
-			<div>
+			<div
+				className='theme'
+				onClick={() => {
+					setTheme(useSelector((state: RootState) => state.theme.value))
+					console.log(useSelector((state: RootState) => state.theme.value))
+				}}
+			>
+				<Theme />
+			</div>
+			<div  >
 				<div
 					ref={mapContainer}
 					className='map.current-container'

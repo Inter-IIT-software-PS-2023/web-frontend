@@ -20,6 +20,7 @@ const SidebarMenu = () => {
 				rootStyles={{
 					[`.${sidebarClasses.container}`]: {
 						color: '#f1faee',
+						zIndex: 9999,
 					},
 				}}
 			>
