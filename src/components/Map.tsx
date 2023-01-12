@@ -158,7 +158,7 @@ const Map = () => {
 				<div
 					ref={mapContainer}
 					className='map.current-container'
-					style={{ height: '100vh' }}
+					style={{ height: '100vh', width: "100vw" }}
 				>
 					<Button
 						variant='contained'
