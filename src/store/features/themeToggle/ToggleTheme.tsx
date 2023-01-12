@@ -9,10 +9,10 @@ export function Theme() {
 	return (
 		<>
 			<div className={'st-sat'}>
-				<button aria-label='Increment value' onClick={() => dispatch(streets())}>
+				<button aria-label='Increment value' className='toggle-button' onClick={() => dispatch(streets())}>
 					Streets
 				</button>
-				<button aria-label='Decrement value' onClick={() => dispatch(satellite())}>
+				<button aria-label='Decrement value' className='toggle-button' onClick={() => dispatch(satellite())}>
 					Satellite
 				</button>
 			</div>

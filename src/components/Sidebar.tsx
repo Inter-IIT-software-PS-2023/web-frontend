@@ -8,11 +8,12 @@ import {
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import "../styles/Sidebar.css"
 const SidebarMenu = () => {
 	const { collapseSidebar } = useProSidebar()
 	return (
-		<div>
+		<>
 			<Sidebar
 				backgroundColor='#14213d'
 				width='150px'
@@ -21,6 +22,7 @@ const SidebarMenu = () => {
 					[`.${sidebarClasses.container}`]: {
 						color: '#f1faee',
 						zIndex: 9999,
+						// position: "absolute"
 					},
 				}}
 			>
@@ -47,7 +49,7 @@ const SidebarMenu = () => {
 					<MenuItem icon={<AnalyticsIcon />}>Analytics</MenuItem>
 				</Menu>
 			</Sidebar>
-		</div>
+		</>
 	)
 }
 
