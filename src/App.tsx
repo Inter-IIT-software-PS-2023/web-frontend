@@ -3,11 +3,12 @@ import { Route, Routes } from 'react-router'
 import SidebarMenu from './components/Sidebar'
 import Csv from './components/Csv';
 import "./styles/Sidebar.css"
+import "./styles/Rider.css"
+import SideBarModule from './components/SideBarModule';
 function App() {
 	return (
 		<div style={{ height: '100vh', display: "flex" }}>
-			<div className='sidebar'><SidebarMenu /></div>
-
+			<SideBarModule />
 
 			<Routes>
 				<Route path='/map' element={<Map />} />
