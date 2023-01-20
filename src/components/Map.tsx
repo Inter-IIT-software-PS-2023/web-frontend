@@ -13,6 +13,8 @@ import { Theme } from '../store/features/themeToggle/ToggleTheme'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/app/Store'
 // import sessionStorage from 'redux-persist/es/storage/session'
+import { useAppSelector } from '../store/app/Hooks'
+import { riderSelector } from '../store/features/Rider'
 import { addRoute, draw, getInstructions } from '../services/mapServices'
 import LightbulbIcon from '@mui/icons-material/Lightbulb'
 const Map = () => {
@@ -21,11 +23,15 @@ const Map = () => {
 	const handleModal = () => setOpen(!open)
 	const mapContainer = useRef<HTMLDivElement>(null)
 	const directionContainer = useRef<HTMLDivElement>(null)
-	const [lat, setLat] = useState(80.3319)
-	const [lng, setLng] = useState(26.4499)
+	const [lat, setLat] = useState(77.5946)
+	const [lng, setLng] = useState(12.9716)
 	const [zoom, setZoom] = useState(15)
-	const [theme, setTheme] = useState(useSelector((state: RootState) => state?.theme?.value))
+	const [theme, setTheme] = useState(
+		useSelector((state: RootState) => state?.theme?.value)
+	)
+	const currentRider = useAppSelector(riderSelector).currentRider
 	useEffect(() => {
+		console.log('themeasdfghj')
 		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
 		// const url = JSON.parse(sessionStorage.getItem("persist:root")!)?.value;
 		if (map.current) return
@@ -57,9 +63,13 @@ const Map = () => {
 		function updateRoute() {
 			removeRoute()
 			const profile = 'driving'
-			const data = draw.getAll()
-			const lastFeature = data.features.length - 1
-			const coords = (data.features[lastFeature].geometry as any).coordinates
+			// const data = draw.getAll()
+			// const lastFeature = data.features.length - 1
+			// const coords = (data.features[lastFeature].geometry as any).coordinates
+			const coords = currentRider?.package.map((item: any) => {
+				return [item.lng, item.lat]
+			})
+			// coords.unshift([currentRider.position.lat, currentRider.position.lng])
 			const newCoords = coords.join(';')
 			const radius = coords.map(() => 20)
 			getMatch(newCoords, radius, profile)
@@ -121,7 +131,7 @@ const Map = () => {
 				) {
 					return bounds.extend(coord)
 				},
-					new mapboxgl.LngLatBounds(coords[0], coords[0]))
+				new mapboxgl.LngLatBounds(coords[0], coords[0]))
 				map.fitBounds(bounds, {
 					padding: 30,
 				})
@@ -141,24 +151,28 @@ const Map = () => {
 		map.current.on('draw.create', updateRoute)
 		map.current.on('draw.update', updateRoute)
 		map.current.on('draw.delete', removeRoute)
-	}, [useSelector((state: RootState) => state.theme.value)]);
+		updateRoute()
+		console.log('currentRider')
+	}, [currentRider])
 
+	// useEffect(() => {
+	// 	updateRoute()
+	// }, [currentRider])
 	return (
 		<>
 			<div
 				className='theme'
-				onClick={() => {
+				onClick={() =>
 					setTheme(useSelector((state: RootState) => state.theme.value))
-					console.log(useSelector((state: RootState) => state.theme.value))
-				}}
+				}
 			>
 				<Theme />
 			</div>
-			<div  >
+			<div>
 				<div
 					ref={mapContainer}
 					className='map.current-container'
-					style={{ height: '100vh', width: "100vw" }}
+					style={{ height: '100vh', width: '100vw' }}
 				>
 					<Button
 						variant='contained'

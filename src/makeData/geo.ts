@@ -1,244 +1,370 @@
-export const data = [
+export const Rider = [
 	{
-		Latitude: 77.64786708,
-		Longitude: 12.99168398,
-	},
-
-	{
-		Latitude: 77.6018793,
-		Longitude: 12.83768729,
-	},
-
-	{
-		Latitude: 77.51995203,
-		Longitude: 13.05977284,
-	},
-
-	{
-		Latitude: 77.59894559,
-		Longitude: 12.8962895,
-	},
-
-	{
-		Latitude: 77.59109098,
-		Longitude: 12.65135657,
-	},
-
-	{
-		Latitude: 77.61075546,
-		Longitude: 13.22683697,
-	},
-
-	{
-		Latitude: 77.57355018,
-		Longitude: 13.33439048,
-	},
-
-	{
-		Latitude: 77.53877694,
-		Longitude: 12.85721662,
-	},
-
-	{
-		Latitude: 77.57611427,
-		Longitude: 13.20673112,
-	},
-
-	{
-		Latitude: 77.56263895,
-		Longitude: 12.61479084,
-	},
-
-	{
-		Latitude: 77.6094187,
-		Longitude: 12.70895577,
-	},
-
-	{
-		Latitude: 77.58688366,
-		Longitude: 13.28486848,
-	},
-
-	{
-		Latitude: 77.54267455,
-		Longitude: 12.71430747,
-	},
-
-	{
-		Latitude: 77.5807016,
-		Longitude: 12.85453312,
-	},
-
-	{
-		Latitude: 77.51706111,
-		Longitude: 13.09472115,
-	},
-
-	{
-		Latitude: 77.64907047,
-		Longitude: 12.94276801,
-	},
-
-	{
-		Latitude: 77.53885124,
-		Longitude: 13.07641946,
-	},
-
-	{
-		Latitude: 77.67224064,
-		Longitude: 13.09961874,
-	},
-
-	{
-		Latitude: 77.64280528,
-		Longitude: 13.07979268,
-	},
-
-	{
-		Latitude: 77.65301889,
-		Longitude: 13.02900293,
-	},
-
-	{
-		Latitude: 77.6708985,
-		Longitude: 12.83133127,
-	},
-
-	{
-		Latitude: 77.56980254,
-		Longitude: 12.57941208,
-	},
-
-	{
-		Latitude: 77.61701943,
-		Longitude: 12.93439764,
-	},
-
-	{
-		Latitude: 77.61372669,
-		Longitude: 12.59343548,
-	},
-
-	{
-		Latitude: 77.53920462,
-		Longitude: 12.79866092,
-	},
-
-	{
-		Latitude: 77.57149634,
-		Longitude: 12.89024329,
-	},
-
-	{
-		Latitude: 77.59362065,
-		Longitude: 13.12544196,
-	},
-
-	{
-		Latitude: 77.56042856,
-		Longitude: 12.74186377,
-	},
-
-	{
-		Latitude: 77.61458335,
-		Longitude: 12.71307678,
-	},
-
-	{
-		Latitude: 77.65928585,
-		Longitude: 13.00751928,
-	},
-
-	{
-		Latitude: 77.52960227,
-		Longitude: 12.88117136,
-	},
-
-	{
-		Latitude: 77.59745457,
-		Longitude: 12.67062534,
-	},
-
-	{
-		Latitude: 77.61828643,
-		Longitude: 13.19204922,
-	},
-
-	{
-		Latitude: 77.62696338,
-		Longitude: 12.92654843,
-	},
-
-	{
-		Latitude: 77.60137782,
-		Longitude: 12.82007624,
-	},
-
-	{
-		Latitude: 77.60470588,
-		Longitude: 12.65609445,
-	},
-
-	{
-		Latitude: 77.63077409,
-		Longitude: 12.83042462,
-	},
-
-	{
-		Latitude: 77.53434448,
-		Longitude: 12.85573592,
-	},
-
-	{
-		Latitude: 77.64226614,
-		Longitude: 12.63448273,
-	},
-
-	{
-		Latitude: 77.55511043,
-		Longitude: 12.97272974,
-	},
-
-	{
-		Latitude: 77.62983927,
-		Longitude: 13.18884527,
-	},
-
-	{
-		Latitude: 77.61156173,
-		Longitude: 13.08912075,
-	},
-
-	{
-		Latitude: 77.60769075,
-		Longitude: 13.30881477,
+		id: 1,
+		name: 'Rider1',
+		position: {
+			lat: 12.9716,
+			lng: 77.5946,
+		},
+		package: [
+			{
+				product_id: 'SKU_144',
+				address: '6, Shakambari Nagar, 1st stage, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586607,
+				lat: 12.909694,
+				customer_name: 'Vickie Ramos',
+				customer_phone: 62201852038,
+			},
+			{
+				product_id: 'SKU_31',
+				address:
+					'1, 24th Main Rd, 1st Phase, Girinagar, KR Layout, Muneshwara T-Block, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.582815,
+				lat: 12.903422,
+				customer_name: 'Jon Hall',
+				customer_phone: 73350066683,
+			},
+			{
+				product_id: 'SKU_113',
+				address:
+					'954, 2nd Floor, 24th Main, 2nd Phase, Opposite LIC Building, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'Linda Kurland',
+				customer_phone: 60104333056,
+			},
+			{
+				product_id: 'SKU_23',
+				address:
+					'1, 24th Main Rd, 1st Phase, Girinagar, KR Layout, Muneshwara T-Block, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.582815,
+				lat: 12.903422,
+				customer_name: 'Cora Massart',
+				customer_phone: 49726345575,
+			},
+			{
+				product_id: 'SKU_144',
+				address: '67, 15th Cross, 6th B Main, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.601662,
+				lat: 12.968365,
+				customer_name: 'George Rivas',
+				customer_phone: 33178947349,
+			},
+			{
+				product_id: 'SKU_38',
+				address: '281, 2nd Floor, 15th Cross, 5th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.589649,
+				lat: 12.900704,
+				customer_name: 'Anna Kelly',
+				customer_phone: 76031744666,
+			},
+			{
+				product_id: 'SKU_109',
+				address:
+					'Cross Roads Inn, 827, Near RV Dental College Compound, 24th Main, 12th Cross, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586607,
+				lat: 12.909694,
+				customer_name: 'Virginia Sauer',
+				customer_phone: 81926175607,
+			},
+		],
 	},
 	{
-		Latitude: 77.65081737,
-		Longitude: 12.89198806,
+		id: 2,
+		name: 'Rider2',
+		position: {
+			lat: 12.9716,
+			lng: 77.5946,
+		},
+		package: [
+			{
+				product_id: 'SKU_144',
+				address: '6, Shakambari Nagar, 1st stage, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586607,
+				lat: 12.909694,
+				customer_name: 'Vickie Ramos',
+				customer_phone: 62201852038,
+			},
+			{
+				product_id: 'SKU_31',
+				address:
+					'1, 24th Main Rd, 1st Phase, Girinagar, KR Layout, Muneshwara T-Block, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.582815,
+				lat: 12.903422,
+				customer_name: 'Jon Hall',
+				customer_phone: 73350066683,
+			},
+			{
+				product_id: 'SKU_113',
+				address:
+					'954, 2nd Floor, 24th Main, 2nd Phase, Opposite LIC Building, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'Linda Kurland',
+				customer_phone: 60104333056,
+			},
+			{
+				product_id: 'SKU_23',
+				address:
+					'1, 24th Main Rd, 1st Phase, Girinagar, KR Layout, Muneshwara T-Block, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.582815,
+				lat: 12.903422,
+				customer_name: 'Cora Massart',
+				customer_phone: 49726345575,
+			},
+			{
+				product_id: 'SKU_144',
+				address: '67, 15th Cross, 6th B Main, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.601662,
+				lat: 12.968365,
+				customer_name: 'George Rivas',
+				customer_phone: 33178947349,
+			},
+			{
+				product_id: 'SKU_38',
+				address: '281, 2nd Floor, 15th Cross, 5th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.589649,
+				lat: 12.900704,
+				customer_name: 'Anna Kelly',
+				customer_phone: 76031744666,
+			},
+			{
+				product_id: 'SKU_109',
+				address:
+					'Cross Roads Inn, 827, Near RV Dental College Compound, 24th Main, 12th Cross, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586607,
+				lat: 12.909694,
+				customer_name: 'Virginia Sauer',
+				customer_phone: 81926175607,
+			},
+			{
+				product_id: 'SKU_141',
+				address: '21, 24th Main Road, 6th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'Jesse Chan',
+				customer_phone: 27632908686,
+			},
+			{
+				product_id: 'SKU_134',
+				address: '99/4, Nataraja Layout, 7th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.583699,
+				lat: 12.890017,
+				customer_name: 'Johnny Runyan',
+				customer_phone: 66314622688,
+			},
+			{
+				product_id: 'SKU_58',
+				address:
+					'72, 2nd Floor, Next to Max & Crossword, 3rd Phase, Inner Ring Road, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586607,
+				lat: 12.909694,
+				customer_name: 'Yvonne Haddad',
+				customer_phone: 83288941747,
+			},
+			{
+				product_id: 'SKU_16',
+				address:
+					'Eden Park7, 8 Doresani Palya, Near Kalyani Magnum, Opposite Oracle, 5th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.589649,
+				lat: 12.900704,
+				customer_name: 'Frank Garcia',
+				customer_phone: 36774055970,
+			},
+			{
+				product_id: 'SKU_9',
+				address: 'Amoolya, 1st Floor, 24th Main, 6th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'Ronnie Cameron',
+				customer_phone: 49180403091,
+			},
+			{
+				product_id: 'SKU_59',
+				address:
+					'47/1, 9th Main,1st Cross, Miniforest, Phase 3, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.601662,
+				lat: 12.968365,
+				customer_name: 'Teresa Ford',
+				customer_phone: 65307617155,
+			},
+			{
+				product_id: 'SKU_44',
+				address:
+					'The HHI Select Bengaluru Hotel, 686, 15th Cross, Ring Road, 2nd Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.589957,
+				lat: 12.916841,
+				customer_name: 'Miguel Evanoff',
+				customer_phone: 32162999926,
+			},
+			{
+				product_id: 'SKU_103',
+				address:
+					'Quality Inn - Shravanthi, 60, 13th Cross, 2nd Main, 3rd Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586607,
+				lat: 12.909694,
+				customer_name: 'Brenda Berry',
+				customer_phone: 67841310375,
+			},
+			{
+				product_id: 'SKU_45',
+				address: '5th Cross Road, Dollar Layout, 3rd Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.601662,
+				lat: 12.968365,
+				customer_name: 'Brian Glass',
+				customer_phone: 98072567575,
+			},
+			{
+				product_id: 'SKU_92',
+				address:
+					'57, 15th Cross Road, Outer Ring Road, Phase 6, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586607,
+				lat: 12.909694,
+				customer_name: 'Daniel Moore',
+				customer_phone: 81028594970,
+			},
+			{
+				product_id: 'SKU_13',
+				address:
+					'97, Wilson Garden Housing Society, 7th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.603979,
+				lat: 12.975771,
+				customer_name: 'James Rego',
+				customer_phone: 72346908029,
+			},
+			{
+				product_id: 'SKU_98',
+				address:
+					'44-45, Terrace Floor, 24th Main Road, 7th phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'Mildred Richards',
+				customer_phone: 73908465584,
+			},
+			{
+				product_id: 'SKU_74',
+				address: 'Amoolya, 1st Floor, 24th Main, 6th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'Daren Devit',
+				customer_phone: 82980897770,
+			},
+			{
+				product_id: 'SKU_138',
+				address: '8, 15th Main, 5th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.589649,
+				lat: 12.900704,
+				customer_name: 'Sarah Kardashian',
+				customer_phone: 72031214940,
+			},
+			{
+				product_id: 'SKU_29',
+				address:
+					'114, Kothanur Main Road, Santrupthi Nagar, 7th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.580426,
+				lat: 12.890239,
+				customer_name: 'Ryan Orlando',
+				customer_phone: 13346207178,
+			},
+		],
 	},
 	{
-		Latitude: 77.53883806,
-		Longitude: 12.93478244,
-	},
-	{
-		Latitude: 77.52504866,
-		Longitude: 13.01815797,
-	},
-	{
-		Latitude: 77.51021649,
-		Longitude: 12.90560941,
-	},
-	{
-		Latitude: 77.60076301,
-		Longitude: 13.18820663,
-	},
-	{
-		Latitude: 77.60378779,
-		Longitude: 13.37682905,
-	},
-	{
-		Latitude: 77.64466244,
-		Longitude: 12.88497356,
+		id: 3,
+		name: 'Rider3',
+		position: {
+			lat: 12.9716,
+			lng: 77.5946,
+		},
+		package: [
+			{
+				product_id: 'SKU_137',
+				address:
+					'1260 SY 35/4 SJR Tower\'s, 24th Main Puttanhalli, 7th Phase, JP Nagar Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'Karen Yuen',
+				customer_phone: 38777880457,
+			},
+			{
+				product_id: 'SKU_21',
+				address:
+					'1260 SY 35/4 SJR Tower\'s, 24th Main Puttanhalli, JP Nagar 7th Phase, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'John Fridley',
+				customer_phone: 14876577908,
+			},
+			{
+				product_id: 'SKU_15',
+				address:
+					'1260, SY 35/4, SJR Towers, 24th Main Puttanhalli, 7th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'Louise Lynch',
+				customer_phone: 15743308603,
+			},
+			{
+				product_id: 'SKU_83',
+				address:
+					'1260 SY 35/4 SJR Tower\'s, JP Nagar 7th Phase, 24th Main Puttanhalli, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'Sam Vest',
+				customer_phone: 96594637899,
+			},
+			{
+				product_id: 'SKU_143',
+				address:
+					'1260, SY 35/4, SJR Towers, 24th Main Puttanhalli, 7th Phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.586924,
+				lat: 12.907441,
+				customer_name: 'Doris Floyd',
+				customer_phone: 75423501902,
+			},
+			{
+				product_id: 'SKU_28',
+				address:
+					'5th A Cross, Lakshmi Complex, Manjunatha Colony, Near RV Dental College, 2nd phase, JP Nagar, Bangalore',
+				location: 'JP Nagar',
+				lng: 77.588039,
+				lat: 12.911667,
+				customer_name: 'Leticia Coleman',
+				customer_phone: 13385067871,
+			},
+		],
 	},
 ]
