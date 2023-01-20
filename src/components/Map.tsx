@@ -17,6 +17,7 @@ import { useAppSelector } from '../store/app/Hooks'
 import { riderSelector } from '../store/features/Rider'
 import { addRoute, draw, getInstructions } from '../services/mapServices'
 import LightbulbIcon from '@mui/icons-material/Lightbulb'
+import SideBarModule from './SideBarModule'
 const Map = () => {
 	const map: any = useRef(null)
 	const [open, setOpen] = useState(false)
@@ -131,7 +132,7 @@ const Map = () => {
 				) {
 					return bounds.extend(coord)
 				},
-				new mapboxgl.LngLatBounds(coords[0], coords[0]))
+					new mapboxgl.LngLatBounds(coords[0], coords[0]))
 				map.fitBounds(bounds, {
 					padding: 30,
 				})
@@ -156,6 +157,7 @@ const Map = () => {
 
 	return (
 		<>
+			<SideBarModule />
 			<div
 				className='theme'
 				onClick={() =>
@@ -170,7 +172,7 @@ const Map = () => {
 					ref={mapContainer}
 					className='map.current-container'
 					style={{ height: '100vh', width: '100vw' }}
-			
+
 				>
 					<Button
 						variant='contained'

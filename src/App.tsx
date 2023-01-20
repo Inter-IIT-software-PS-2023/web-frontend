@@ -5,14 +5,16 @@ import Analytics from './components/Analytics'
 import './styles/Sidebar.css'
 import './styles/Rider.css'
 import SideBarModule from './components/SideBarModule'
+import Dashboard from './components/Dashboard'
 function App() {
 	return (
 		<div style={{ height: '100vh', display: 'flex' }}>
-			<SideBarModule />
+
 			<Routes>
 				<Route path='/map' element={<Map />} />
 				<Route path='/csv' element={<Csv />} />
 				<Route path='/analytics' element={<Analytics />} />
+				<Route path='/dashboard' element={<Dashboard />}></Route>
 			</Routes>
 		</div>
 	)

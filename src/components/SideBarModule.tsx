@@ -27,7 +27,7 @@ const SideBarModule = () => {
 			<div className='sidebar'>
 				<Sidebar
 					backgroundColor='#14213d'
-					width='150px'
+					width='176px'
 					style={{ height: '100vh' }}
 					rootStyles={{
 						[`.${sidebarClasses.container}`]: {
@@ -70,6 +70,15 @@ const SideBarModule = () => {
 							}}
 						>
 							Analytics
+						</MenuItem>
+						<MenuItem
+							icon={<AnalyticsIcon />}
+							onClick={() => {
+								setClicked(false)
+								navigate('/dashboard')
+							}}
+						>
+							Dashboard
 						</MenuItem>
 					</Menu>
 				</Sidebar>
