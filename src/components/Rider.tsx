@@ -1,7 +1,8 @@
 import SearchBar from 'material-ui-search-bar'
 import React from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import CircleIcon from '@mui/icons-material/Circle'
+import CircleIcon from '@mui/icons-material/Circle';
+import Modal from "../components/Modal"
 const Rider = () => {
 	return (
 		<div className='rider-cont'>

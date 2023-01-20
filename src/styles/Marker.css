@@ -7,17 +7,18 @@
   cursor: pointer;
 }
 
-.mapboxgl-popup {
+.mapboxgl-popup-content {
+  border: none;
   background: transparent;
+  box-shadow: none;
 }
 
-.mapboxgl-popup-content {
-  padding-top: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Open Sans', sans-serif;
-  font-size: large;
-  /* border-radius: 10% 10% 20% 20%; */
+.mapboxgl-popup-close-button {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0 3px 0 0;
+  cursor: pointer;
+  position: absolute;
+  right: 14px;
+  top: 9px;
 }

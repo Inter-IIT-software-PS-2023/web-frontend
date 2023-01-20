@@ -18,6 +18,7 @@ import { riderSelector } from '../store/features/Rider'
 import { addRoute, draw, getInstructions } from '../services/mapServices'
 import LightbulbIcon from '@mui/icons-material/Lightbulb'
 import SideBarModule from './SideBarModule'
+import "../styles/Popper.css"
 const Map = () => {
 	const map: any = useRef(null)
 	const [open, setOpen] = useState(false)
@@ -54,6 +55,15 @@ const Map = () => {
 			mapboxgl: mapboxgl,
 			collapsed: true,
 		})
+
+		const popup = new mapboxgl.Popup()
+			.setLngLat([77.5946, 12.9716])
+			.setHTML(`
+			<blockquote class="speech-bubble">
+  			<p>When will Apple release a MacBook Air 15" with Retina?</p>
+			</blockquote>
+			`)
+			.addTo(map.current);
 
 		// Rider Marker
 		const el = document.createElement('div')

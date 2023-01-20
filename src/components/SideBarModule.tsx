@@ -16,6 +16,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../store/app/Hooks'
 import { Rider, riderSelector, setCurrentRider } from '../store/features/Rider'
 import '../styles/Sidebar.css'
+
 const SideBarModule = () => {
 	const dispatch = useAppDispatch()
 	const { collapseSidebar } = useProSidebar()
@@ -85,7 +86,10 @@ const SideBarModule = () => {
 			</div>
 			<div className={`rider ${clicked && 'hide'}`}>
 				<div className={`rider-cont ${clicked && 'hide'}`}>
-					<h4>Rider</h4>
+					<div className="rider-header">
+						<h4>Rider</h4>
+
+					</div>
 					<SearchBar />
 					<div className='riders'>
 						{Rider?.map((rider: Rider) => {
