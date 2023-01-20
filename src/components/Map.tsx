@@ -24,7 +24,9 @@ const Map = () => {
 	const [lat, setLat] = useState(80.3319)
 	const [lng, setLng] = useState(26.4499)
 	const [zoom, setZoom] = useState(15)
-	const [theme, setTheme] = useState(useSelector((state: RootState) => state?.theme?.value))
+	const [theme, setTheme] = useState(
+		useSelector((state: RootState) => state?.theme?.value)
+	)
 	useEffect(() => {
 		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
 		// const url = JSON.parse(sessionStorage.getItem("persist:root")!)?.value;
@@ -121,7 +123,7 @@ const Map = () => {
 				) {
 					return bounds.extend(coord)
 				},
-					new mapboxgl.LngLatBounds(coords[0], coords[0]))
+				new mapboxgl.LngLatBounds(coords[0], coords[0]))
 				map.fitBounds(bounds, {
 					padding: 30,
 				})
@@ -141,7 +143,7 @@ const Map = () => {
 		map.current.on('draw.create', updateRoute)
 		map.current.on('draw.update', updateRoute)
 		map.current.on('draw.delete', removeRoute)
-	}, [useSelector((state: RootState) => state.theme.value)]);
+	}, [useSelector((state: RootState) => state.theme.value)])
 
 	return (
 		<>
@@ -154,11 +156,11 @@ const Map = () => {
 			>
 				<Theme />
 			</div>
-			<div  >
+			<div>
 				<div
 					ref={mapContainer}
 					className='map.current-container'
-					style={{ height: '100vh', width: "100vw" }}
+					style={{ height: '100vh', width: '100vw' }}
 				>
 					<Button
 						variant='contained'
