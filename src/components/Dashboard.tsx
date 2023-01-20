@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import "../styles/Dashboard.css"
 import img1 from "../assets/addidas.jpg";
 import img2 from "../assets/bag.jpg";
@@ -12,94 +11,9 @@ import img9 from "../assets/sunglasses.jpg";
 import SidebarMenu from './Sidebar';
 
 const Dashboard = () => {
-    // useEffect(() => {
-    //     let sidebar = document.querySelector(".sidebar") as HTMLElement;
-    //     let sidebarBtn = document.querySelector<HTMLElement>(".sidebarBtn") as HTMLElement;
-    //     sidebarBtn!.onclick = function () {
-    //         sidebar!.classList.toggle("active");
-    //         if (sidebar!.classList.contains("active")) {
-    //             sidebarBtn!.classList.replace("bx-menu", "bx-menu-alt-right");
-    //         } else
-    //             sidebarBtn!.classList.replace("bx-menu-alt-right", "bx-menu");
-    //     }
-    // })
     return (
         <>
             <SidebarMenu />
-            {/* <div className="sidebar">
-                <div className="logo-details">
-                    <i className='bx bxl-c-plus-plus'></i>
-                    <span className="logo_name">CodingLab</span>
-                </div>
-                <ul className="nav-links">
-                    <li>
-                        <a href="#" className="active">
-                            <i className='bx bx-grid-alt' ></i>
-                            <span className="links_name">Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className='bx bx-box' ></i>
-                            <span className="links_name">Product</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className='bx bx-list-ul' ></i>
-                            <span className="links_name">Order list</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className='bx bx-pie-chart-alt-2' ></i>
-                            <span className="links_name">Analytics</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className='bx bx-coin-stack' ></i>
-                            <span className="links_name">Stock</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className='bx bx-book-alt' ></i>
-                            <span className="links_name">Total order</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className='bx bx-user' ></i>
-                            <span className="links_name">Team</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className='bx bx-message' ></i>
-                            <span className="links_name">Messages</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className='bx bx-heart' ></i>
-                            <span className="links_name">Favrorites</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className='bx bx-cog' ></i>
-                            <span className="links_name">Setting</span>
-                        </a>
-                    </li>
-                    <li className="log_out">
-                        <a href="#">
-                            <i className='bx bx-log-out'></i>
-                            <span className="links_name">Log out</span>
-                        </a>
-                    </li>
-                </ul>
-            </div> */}
             <section className="home-section">
                 <nav>
                     <div className="search-box">
