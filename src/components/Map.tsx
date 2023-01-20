@@ -137,7 +137,6 @@ const Map = () => {
 				})
 			}
 		}
-
 		function removeRoute() {
 			if (!map.current.getSource('route')) return
 			map.current.removeLayer('route')
@@ -155,9 +154,6 @@ const Map = () => {
 		console.log('currentRider')
 	}, [currentRider])
 
-	// useEffect(() => {
-	// 	updateRoute()
-	// }, [currentRider])
 	return (
 		<>
 			<div
@@ -168,11 +164,13 @@ const Map = () => {
 			>
 				<Theme />
 			</div>
+
 			<div>
 				<div
 					ref={mapContainer}
 					className='map.current-container'
 					style={{ height: '100vh', width: '100vw' }}
+			
 				>
 					<Button
 						variant='contained'
