@@ -6,6 +6,7 @@ import './styles/Sidebar.css'
 import './styles/Rider.css'
 import Dashboard from './components/Dashboard'
 import "./styles/Popper.css"
+import VerticalLinearStepper from './components/Home'
 function App() {
 	return (
 		<div style={{ height: '100vh', display: 'flex' }}>
@@ -14,6 +15,7 @@ function App() {
 				<Route path='/csv' element={<Csv />} />
 				<Route path='/analytics' element={<Analytics />} />
 				<Route path='/dashboard' element={<Dashboard />}></Route>
+				<Route path='/' element={<VerticalLinearStepper />}></Route>
 			</Routes>
 		</div>
 	)
