@@ -86,9 +86,8 @@ const SideBarModule = () => {
 			</div>
 			<div className={`rider ${clicked && 'hide'}`}>
 				<div className={`rider-cont ${clicked && 'hide'}`}>
-					<div className="rider-header">
+					<div className='rider-header'>
 						<h4>Rider</h4>
-
 					</div>
 					<SearchBar />
 					<div className='riders'>
@@ -98,11 +97,12 @@ const SideBarModule = () => {
 									key={rider.id}
 									className='rider-info'
 									onClick={() => {
-										window.location.reload()
-										dispatch(setCurrentRider(rider))
+										dispatch(setCurrentRider([rider]))
+										
 									}}
 								>
-									<AccountCircleIcon /> <div className='rider-name'>{rider.name}</div>{' '}
+									<AccountCircleIcon />
+									<div className='rider-name'>{rider.name}</div>
 									<CircleIcon />
 								</div>
 							)

@@ -21,11 +21,11 @@ export interface Rider {
 
 interface RiderState {
 	rider: Array<Rider>
-	currentRider: Rider
+	currentRider: Array<Rider>
 }
 const initialState: RiderState = {
 	rider: Rider,
-	currentRider: Rider[0],
+	currentRider: [],
 }
 
 export const riderSlice = createSlice({

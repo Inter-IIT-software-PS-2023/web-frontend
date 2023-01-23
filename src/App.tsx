@@ -5,7 +5,7 @@ import Analytics from './components/Analytics'
 import './styles/Sidebar.css'
 import './styles/Rider.css'
 import Dashboard from './components/Dashboard'
-import "./styles/Popper.css"
+import './styles/Popper.css'
 function App() {
 	return (
 		<div style={{ height: '100vh', display: 'flex' }}>
@@ -13,7 +13,7 @@ function App() {
 				<Route path='/map' element={<Map />} />
 				<Route path='/csv' element={<Csv />} />
 				<Route path='/analytics' element={<Analytics />} />
-				<Route path='/dashboard' element={<Dashboard />}></Route>
+				<Route path='/dashboard' element={<Dashboard />} />
 			</Routes>
 		</div>
 	)

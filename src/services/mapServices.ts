@@ -1,4 +1,6 @@
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
+import { length, along } from '@turf/turf'
+import mapboxgl from 'mapbox-gl'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const addRoute = (map: any, coords: any) => {
@@ -29,6 +31,8 @@ const addRoute = (map: any, coords: any) => {
 		})
 	}
 }
+
+// draw
 
 const draw = new MapboxDraw({
 	displayControlsDefault: false,
@@ -84,20 +88,88 @@ const draw = new MapboxDraw({
 	],
 })
 
-const getInstructions = (
-	data: { legs: any; duration: number },
-	directions: any
-) => {
-	let tripDirections = ''
-	for (const leg of data.legs) {
-		const steps = leg.steps
-		for (const step of steps) {
-			tripDirections += `<li>${step.maneuver.instruction}</li>`
-		}
-	}
-	directions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
-		data.duration / 60
-	)} min.</strong></p><ol>${tripDirections}</ol>`
+// updateRoute
+
+function updateRoute(currentRider: any, map: any, marker: any) {
+	removeRoute(map)
+	const profile = 'driving'
+	const coords = currentRider?.package.map((item: any) => {
+		return [item.lng, item.lat]
+	})
+	coords.unshift([currentRider?.position.lat, currentRider?.position.lng])
+	const newCoords = coords.join(';')
+	const radius = coords.map(() => 20)
+	getMatch(newCoords, radius, profile, map, marker)
 }
 
-export { addRoute, draw, getInstructions }
+async function getMatch(
+	coordinates: any,
+	radius: any[],
+	profile: string,
+	map: any,
+	marker: any
+) {
+	const radiuses = radius.join(';')
+	const query = await fetch(
+		`https://api.mapbox.com/matching/v5/mapbox/${profile}/${coordinates}?geometries=geojson&radiuses=${radiuses}&steps=true&access_token=${mapboxgl.accessToken}`
+	)
+	const response = await query.json()
+	if (response.code !== 'Ok') {
+		alert('No roads avaiable')
+		return
+	}
+	const coords = response.matchings[0].geometry
+	// animation for marker motion
+	const route = {
+		type: 'FeatureCollection',
+		features: [
+			{
+				type: 'Feature',
+				geometry: {
+					type: 'LineString',
+					coordinates: coords.coordinates,
+				},
+			},
+		],
+	}
+	const lineDistance = length(route.features[0] as any)
+	const arc = []
+	const steps = 500
+	for (let i = 0; i < lineDistance; i += lineDistance / steps) {
+		const segment = along(route.features[0] as any, i)
+		arc.push(segment.geometry.coordinates)
+	}
+	route.features[0].geometry.coordinates = arc
+	let counter = 0
+	addRoute(map, coords)
+	fitMap(map, coords.coordinates)
+	marker.setLngLat(route.features[0].geometry.coordinates[0]).addTo(map)
+	function animate() {
+		marker.setLngLat(route.features[0].geometry.coordinates[counter])
+		counter = counter + 1
+		if (counter < steps) {
+			requestAnimationFrame(animate)
+		}
+	}
+	requestAnimationFrame(animate)
+	function fitMap(map: any, coords: any) {
+		const bounds = coords.reduce(function (
+			bounds: { extend: (arg0: any) => any },
+			coord: any
+		) {
+			return bounds.extend(coord)
+		},
+		new mapboxgl.LngLatBounds(coords[0], coords[0]))
+		map.fitBounds(bounds, {
+			padding: 30,
+		})
+	}
+}
+
+function removeRoute(map: any) {
+	if (!map.getSource('route')) return
+	map.removeLayer('route')
+	map.removeSource('route')
+}
+
+export { addRoute, draw, updateRoute, removeRoute }

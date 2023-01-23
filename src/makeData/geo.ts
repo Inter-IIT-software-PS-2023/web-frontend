@@ -80,7 +80,7 @@ export const Rider = [
 		id: 2,
 		name: 'Rider2',
 		position: {
-			lat: 12.9716,
+			lat: 12.9726,
 			lng: 77.5946,
 		},
 		package: [
@@ -301,14 +301,14 @@ export const Rider = [
 		id: 3,
 		name: 'Rider3',
 		position: {
-			lat: 12.9716,
+			lat: 12.9736,
 			lng: 77.5946,
 		},
 		package: [
 			{
 				product_id: 'SKU_137',
 				address:
-					'1260 SY 35/4 SJR Tower\'s, 24th Main Puttanhalli, 7th Phase, JP Nagar Bangalore',
+					"1260 SY 35/4 SJR Tower's, 24th Main Puttanhalli, 7th Phase, JP Nagar Bangalore",
 				location: 'JP Nagar',
 				lng: 77.586924,
 				lat: 12.907441,
@@ -318,7 +318,7 @@ export const Rider = [
 			{
 				product_id: 'SKU_21',
 				address:
-					'1260 SY 35/4 SJR Tower\'s, 24th Main Puttanhalli, JP Nagar 7th Phase, Bangalore',
+					"1260 SY 35/4 SJR Tower's, 24th Main Puttanhalli, JP Nagar 7th Phase, Bangalore",
 				location: 'JP Nagar',
 				lng: 77.586924,
 				lat: 12.907441,
@@ -338,7 +338,7 @@ export const Rider = [
 			{
 				product_id: 'SKU_83',
 				address:
-					'1260 SY 35/4 SJR Tower\'s, JP Nagar 7th Phase, 24th Main Puttanhalli, JP Nagar, Bangalore',
+					"1260 SY 35/4 SJR Tower's, JP Nagar 7th Phase, 24th Main Puttanhalli, JP Nagar, Bangalore",
 				location: 'JP Nagar',
 				lng: 77.586924,
 				lat: 12.907441,
