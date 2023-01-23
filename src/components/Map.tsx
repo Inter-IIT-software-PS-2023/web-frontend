@@ -7,7 +7,6 @@ import '../styles/MapDisplay.css'
 import '../styles/Marker.css'
 import mapboxgl from 'mapbox-gl'
 import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder'
-
 import { Theme } from '../store/features/themeToggle/ToggleTheme'
 import { useAppSelector } from '../store/app/Hooks'
 import { riderSelector } from '../store/features/Rider'
@@ -38,7 +37,7 @@ const Map = () => {
 			center: [lat, lng],
 			zoom: zoom,
 		})
-		Riders.forEach((rider: any, index: number) => {
+		riders.forEach((rider: any, index: number) => {
 			rider.package.forEach((packag: any) => {
 				new mapboxgl.Marker({ color: colors[index] })
 					.setLngLat([packag.lng, packag.lat])

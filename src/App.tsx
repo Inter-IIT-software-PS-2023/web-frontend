@@ -7,6 +7,7 @@ import VerticalLinearStepper from './components/Home'
 import './styles/Sidebar.css'
 import './styles/Rider.css'
 import './styles/Popper.css'
+import LoadingScreen from './components/LoadingScreen'
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 				<Route path='/csv' element={<Csv />} />
 				<Route path='/analytics' element={<Analytics />} />
 				<Route path='/dashboard' element={<Dashboard />} />
+				<Route path='/loading' element={<LoadingScreen />} />
 				<Route path='/' element={<VerticalLinearStepper />}></Route>
 			</Routes>
 		</div>
