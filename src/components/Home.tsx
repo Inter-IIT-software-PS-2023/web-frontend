@@ -74,14 +74,6 @@ const FeedInput = () => {
                         alignItems: "center"
                     }}><input id='xlsx' type="file" style={{ display: "none", cursor: "pointer" }} />Upload File <UploadFileIcon /></label>
                 </div>
-                {/* <Button variant="contained" component="label">
-                    Upload
-                    <input hidden accept="image/*" multiple type="file" />
-                </Button>
-                <IconButton color="primary" aria-label="upload picture" component="label">
-                    <input hidden accept="image/*" type="file" />
-                    <PhotoCamera />
-                </IconButton> */}
             </div>
 
         </div>
