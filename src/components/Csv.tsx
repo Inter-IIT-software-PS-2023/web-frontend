@@ -1,4 +1,4 @@
-import * as XLSX from 'xlsx'
+import * as XLSX from 'xlsx';
 import '../styles/Csv.css';
 const Csv = () => {
 	const readExcel = async (e: { target: { files: FileList } }) => {
