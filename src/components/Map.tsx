@@ -30,6 +30,7 @@ const Map = () => {
 	const theme = useAppSelector(themeSelector)
 	const currentRider = useAppSelector(riderSelector).currentRider
 	const riders = useAppSelector(riderSelector).rider
+	console.log(riders);
 	const [open, setOpen] = useState(false)
 	const handleClose = () => {
 		setOpen(!open)

@@ -18,22 +18,20 @@ const Csv = () => {
 				type='file'
 				onChange={e => {
 					e.preventDefault()
-					if (e) {
-						readExcel(e)
-							.then(data => {
-								fetch('http://localhost:8000/orders/new', {
-									method: 'POST',
-									body: JSON.stringify(data),
-									headers: {
-										'Content-Type': 'application/json',
-									},
-								})
-									.then(resp => resp.json())
-									
-									.catch(err => console.log(err))
+					readExcel(e)
+						.then(data => {
+							fetch('http://localhost:8000/orders/new', {
+								method: 'POST',
+								body: JSON.stringify(data),
+								headers: {
+									'Content-Type': 'application/json',
+								},
 							})
-							.catch(err => console.log(err))
-					}
+								.then(resp => resp.json())
+
+								.catch(err => console.log(err))
+						})
+						.catch(err => console.log(err))
 				}}
 				className='csv-input'
 			/>
