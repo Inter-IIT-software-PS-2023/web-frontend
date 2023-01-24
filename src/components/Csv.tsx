@@ -16,7 +16,7 @@ const Csv = () => {
 		<div>
 			<input
 				type='file'
-				onChange={e => {
+				onChange={(e: any) => {
 					e.preventDefault()
 					readExcel(e)
 						.then(data => {
