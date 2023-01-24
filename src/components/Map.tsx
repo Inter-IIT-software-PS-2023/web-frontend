@@ -46,6 +46,18 @@ const Map = () => {
 			rider.package.forEach((packag: any) => {
 				new mapboxgl.Marker({ color: colors[index] })
 					.setLngLat([packag.lng, packag.lat])
+					.setPopup(
+						new mapboxgl.Popup({ offset: 25 }) // add popups
+							.setHTML(
+								`<div style=background-color:white;width:150px;height:100px>
+								<h4 style=text-align:center>Name : ${packag.product_id}</h4>
+								<div style=text-align:center >${packag.customer_name} </div>
+								<div style=text-align:center >Latitude: ${packag.lat} </div>
+								<div style=text-align:center >Longitude: ${packag.lng} </div>
+								</div>
+								`
+							)
+					)
 					.addTo(map.current)
 			})
 			const el = document.createElement('div')
@@ -53,6 +65,19 @@ const Map = () => {
 			el.classList.add('marker')
 			const marker = new mapboxgl.Marker(el)
 				.setLngLat([rider.position.lng, rider.position.lat])
+				.setPopup(
+					new mapboxgl.Popup({ offset: 25 }) // add popups
+						.setHTML(
+							`<div style=background-color:white;width:150px;height:100px >
+								<h4 style=text-align:center>Name : ${rider.name}</h4>
+								<div style=text-align:center >Package delivered: ${rider.package.length} </div>
+								<div style=text-align:center >Package left: 0 </div>
+								<div style=text-align:center >Latitude: ${rider.position.lat} </div>
+								<div style=text-align:center >Longitude: ${rider.position.lng} </div>
+								</div>
+								`
+						)
+				)
 				.addTo(map.current)
 			setMarker(marker)
 		})

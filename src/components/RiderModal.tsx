@@ -24,6 +24,7 @@ const style = {
 	boxShadow: 2,
 	p: 4,
 	overflow: 'scroll',
+	zIndex: 999999,
 }
 
 const RiderModal = (props: { open: any; handleClose: any }) => {

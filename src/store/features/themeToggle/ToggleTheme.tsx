@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { themChanger } from './Toggle'
+import { themChangerStr, themChangerSat } from './Toggle'
 import { FaMap, FaSatellite } from 'react-icons/fa'
 export function Theme() {
 	const dispatch = useDispatch()
@@ -9,7 +9,7 @@ export function Theme() {
 				<button
 					aria-label='Increment value'
 					className='toggle-button'
-					onClick={() => dispatch(themChanger())}
+					onClick={() => dispatch(themChangerStr())}
 				>
 					<FaMap />
 					Streets
@@ -17,7 +17,7 @@ export function Theme() {
 				<button
 					aria-label='Decrement value'
 					className='toggle-button'
-					onClick={() => dispatch(themChanger())}
+					onClick={() => dispatch(themChangerSat())}
 				>
 					<FaSatellite />
 					Satellite

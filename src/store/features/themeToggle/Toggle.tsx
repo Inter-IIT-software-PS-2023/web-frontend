@@ -13,17 +13,15 @@ export const counterSlice = createSlice({
 	name: 'counter',
 	initialState,
 	reducers: {
-		themChanger: state => {
-			if (state.value === 'mapbox://styles/mapbox/satellite-v9') {
-				state.value = 'mapbox://styles/mapbox/streets-v12'
-				return
-			}
-
+		themChangerStr: state => {
+			state.value = 'mapbox://styles/mapbox/streets-v12'
+		},
+		themChangerSat: state => {
 			state.value = 'mapbox://styles/mapbox/satellite-v9'
 		},
 	},
 })
 
-export const { themChanger } = counterSlice.actions
+export const { themChangerStr,themChangerSat } = counterSlice.actions
 export const themeSelector = (state: RootState) => state.theme.value
 export default counterSlice.reducer
