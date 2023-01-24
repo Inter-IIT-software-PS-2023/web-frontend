@@ -54,8 +54,7 @@ const Map = () => {
 								<div style=text-align:center >${packag.customer_name} </div>
 								<div style=text-align:center >Latitude: ${packag.lat} </div>
 								<div style=text-align:center >Longitude: ${packag.lng} </div>
-								</div>
-								`
+								</div>`
 							)
 					)
 					.addTo(map.current)
@@ -74,8 +73,7 @@ const Map = () => {
 								<div style=text-align:center >Package left: 0 </div>
 								<div style=text-align:center >Latitude: ${rider.position.lat} </div>
 								<div style=text-align:center >Longitude: ${rider.position.lng} </div>
-								</div>
-								`
+								</div>	`
 						)
 				)
 				.addTo(map.current)
