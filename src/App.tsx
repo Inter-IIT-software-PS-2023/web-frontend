@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router'
 import Csv from './components/Csv'
 import Map from './components/Map'
-import Analytics from './components/Analytics'
 import Dashboard from './components/Dashboard'
 import VerticalLinearStepper from './components/Home'
 import './styles/Sidebar.css'
@@ -14,7 +13,6 @@ function App() {
 			<Routes>
 				<Route path='/map' element={<Map />} />
 				<Route path='/csv' element={<Csv />} />
-				<Route path='/analytics' element={<Analytics />} />
 				<Route path='/dashboard' element={<Dashboard />} />
 				<Route path='/' element={<VerticalLinearStepper />}></Route>
 			</Routes>

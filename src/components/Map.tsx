@@ -7,7 +7,7 @@ import '../styles/MapDisplay.css'
 import '../styles/Marker.css'
 import mapboxgl from 'mapbox-gl'
 import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder'
-
+import RiderModal from './RiderModal'
 import { Theme } from '../store/features/themeToggle/ToggleTheme'
 import { useAppSelector } from '../store/app/Hooks'
 import { riderSelector } from '../store/features/Rider'
@@ -16,6 +16,7 @@ import { themeSelector } from '../store/features/themeToggle/Toggle'
 import { colors } from '../utils/colors'
 import SideBarModule from './SideBarModule'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import InventoryIcon from '@mui/icons-material/Inventory'
 import '../styles/Popper.css'
 import { Button } from '@mui/material'
 const Map = () => {
@@ -29,7 +30,10 @@ const Map = () => {
 	const theme = useAppSelector(themeSelector)
 	const currentRider = useAppSelector(riderSelector).currentRider
 	const riders = useAppSelector(riderSelector).rider
-
+	const [open, setOpen] = useState(false)
+	const handleClose = () => {
+		setOpen(!open)
+	}
 	const setMarkers = (Riders = riders) => {
 		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
 		map.current = new mapboxgl.Map({
@@ -66,7 +70,6 @@ const Map = () => {
 		// map.current.addControl(draw)
 		map.current.on('draw.create', updateRoute)
 		map.current.on('draw.update', updateRoute)
-		console.log(map.current)
 		setMap(map.current)
 	}
 
@@ -117,6 +120,30 @@ const Map = () => {
 				>
 					<PlayArrowIcon />
 				</Button>
+				<Button
+					variant='contained'
+					sx={{
+						borderRadius: '50%',
+						height: '60px',
+						position: 'absolute',
+						bottom: '90px',
+						right: '0',
+						zIndex: '3',
+						backgroundColor: 'white',
+						color: 'black',
+						boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
+						'&:hover': {
+							backgroundColor: 'white',
+							boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
+						},
+					}}
+					onClick={() => handleClose()}
+				>
+					<InventoryIcon />
+				</Button>
+			</div>
+			<div>
+				<RiderModal open={open} handleClose={handleClose} />
 			</div>
 		</>
 	)

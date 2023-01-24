@@ -33,7 +33,7 @@ const SideBarModule = () => {
 					rootStyles={{
 						[`.${sidebarClasses.container}`]: {
 							color: '#f1faee',
-							zIndex: 9999,
+							// zIndex: 1,
 						},
 					}}
 				>
@@ -67,15 +67,6 @@ const SideBarModule = () => {
 							icon={<AnalyticsIcon />}
 							onClick={() => {
 								setClicked(false)
-								navigate('/analytics')
-							}}
-						>
-							Analytics
-						</MenuItem>
-						<MenuItem
-							icon={<AnalyticsIcon />}
-							onClick={() => {
-								setClicked(false)
 								navigate('/dashboard')
 							}}
 						>
@@ -98,7 +89,6 @@ const SideBarModule = () => {
 									className='rider-info'
 									onClick={() => {
 										dispatch(setCurrentRider([rider]))
-										
 									}}
 								>
 									<AccountCircleIcon />
