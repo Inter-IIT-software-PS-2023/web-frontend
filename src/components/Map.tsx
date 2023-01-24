@@ -42,7 +42,7 @@ const Map = () => {
 			center: [lat, lng],
 			zoom: zoom,
 		})
-		riders.forEach((rider: any, index: number) => {
+		Riders.forEach((rider: any, index: number) => {
 			rider.package.forEach((packag: any) => {
 				new mapboxgl.Marker({ color: colors[index] })
 					.setLngLat([packag.lng, packag.lat])
