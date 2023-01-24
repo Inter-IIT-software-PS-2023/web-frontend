@@ -96,7 +96,7 @@ function updateRoute(currentRider: any, map: any, marker: any) {
 	const coords = currentRider?.package.map((item: any) => {
 		return [item.lng, item.lat]
 	})
-	coords.unshift([currentRider?.position.lat, currentRider?.position.lng])
+	coords.unshift([currentRider?.position.lng, currentRider?.position.lat])
 	const newCoords = coords.join(';')
 	const radius = coords.map(() => 20)
 	getMatch(newCoords, radius, profile, map, marker)
