@@ -11,24 +11,19 @@ import SidebarMenu from './Sidebar'
 import LineStyle from './Charts/LineStyle'
 import ColumnPlot from './Charts/ColumnPlot'
 import ProgressChart from './Charts/Progress'
-
+import "../styles/Home.css";
+import img from "../assets/growsimplee.png"
+import { useNavigate } from 'react-router-dom'
 const Dashboard = () => {
+	const navigate = useNavigate()
 	return (
 		<>
 			<SidebarMenu />
 			<section className='home-section'>
-				<nav>
-					<div className='search-box'>
-						<input type='text' placeholder='Search...' />
-						<i className='bx bx-search'></i>
-					</div>
-					<div className='profile-details'>
-						{/* <img src={img6} alt="" /> */}
-						<label htmlFor='xlsx' className='admin_name'>
-							<input id='xlsx' type='file' style={{ display: 'none' }} />
-							Upload File <i className='bx bx-chevron-down'></i>
-						</label>
-					</div>
+				<nav className='nav-home' onClick={() => {
+					navigate("/");
+				}}>
+					<img src={img} alt="" className='logo-img' />
 				</nav>
 				<div className='home-content'>
 					<div className='overview-boxes'>
