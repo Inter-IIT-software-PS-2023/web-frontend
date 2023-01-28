@@ -11,7 +11,8 @@
 .home-section {
     /* position: relative; */
     background: #f5f5f5;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: scroll;
     width: 100%;
     /* left: 240px; */
     transition: all 0.5s ease;
@@ -279,7 +280,7 @@ nav .profile-details i {
 
 /* Right box */
 .home-content .sales-boxes .top-sales {
-    width: 35%;
+    width: 51%;
     background: #fff;
     padding: 20px 30px;
     margin: 0 20px 0 0;
@@ -314,6 +315,7 @@ nav .profile-details i {
     font-size: 17px;
     font-weight: 400;
     color: #333;
+    width: 231px;
 }
 
 /* Responsive Media Query */
@@ -381,5 +383,31 @@ nav .profile-details i {
         left: 0;
     }
 
+
+}
+
+.charts {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.line {
+    width: 47%;
+    background: #fff;
+    padding: 20px 30px;
+    margin: 0 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.charts {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 65px;
+    padding: 10px;
 
 }
