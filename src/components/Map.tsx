@@ -30,7 +30,7 @@ const Map = () => {
 	const theme = useAppSelector(themeSelector)
 	const currentRider = useAppSelector(riderSelector).currentRider
 	const riders = useAppSelector(riderSelector).rider
-	console.log(riders);
+	console.log(riders)
 	const [open, setOpen] = useState(false)
 	const handleClose = () => {
 		setOpen(!open)
@@ -43,7 +43,7 @@ const Map = () => {
 			center: [lat, lng],
 			zoom: zoom,
 		})
-		Riders.forEach((rider: any, index: number) => {
+		Riders?.forEach((rider: any, index: number) => {
 			rider.package.forEach((packag: any) => {
 				new mapboxgl.Marker({ color: colors[index] })
 					.setLngLat([packag.lng, packag.lat])

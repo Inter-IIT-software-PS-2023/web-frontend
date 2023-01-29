@@ -45,7 +45,6 @@ const SidebarMenu = () => {
 					<MenuItem icon={<AddLocationAltIcon />} routerLink={<Link to='/map' />}>
 						Routes
 					</MenuItem>
-					<MenuItem icon={<AnalyticsIcon />}>Analytics</MenuItem>
 					<MenuItem icon={<AnalyticsIcon />} routerLink={<Link to='/dasboard' />}>
 						Dashboard
 					</MenuItem>
