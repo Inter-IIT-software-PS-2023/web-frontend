@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
@@ -36,7 +36,7 @@ const Map = () => {
 		setOpen(!open)
 	}
 	const setMarkers = (Riders = riders) => {
-		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
+		mapboxgl.accessToken = "pk.eyJ1IjoiaXNodTExNDQwNyIsImEiOiJjbGNpcHdqdjkwMnplM29xbXJjdXRoM3hiIn0.7bDoT4N8RAglxqUzf8lKvg"
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current || '',
 			style: theme,
