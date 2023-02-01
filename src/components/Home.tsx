@@ -14,6 +14,7 @@ import img from "../assets/growsimplee.png"
 import { useNavigate } from 'react-router-dom';
 
 const GeneralInstruction = () => {
+
     return (
         <div style={{ height: "100%", display: "flex", justifyContent: "space-around", flexDirection: "column" }}>
             <p>There are three steps involved in executing a last mile delivery operation.</p>
@@ -99,11 +100,14 @@ const GenerateRiders = () => {
 }
 
 const ClusterAndDeliver = () => {
+    const navigate = useNavigate();
     return (
         <div style={{ height: "100%", display: "flex", justifyContent: "space-around", flexDirection: "column" }}>
             <p>Click on the button to start the last mile delivery operation. This will cluster
                 orders that each rider has to deliver along with the route one has to travel. </p>
-            <Button variant="contained" sx={{ height: "50px" }}>
+            <Button variant="contained" sx={{ height: "50px" }} onClick={() => {
+                navigate("/map")
+            }}>
                 Proceed
             </Button>
         </div>
