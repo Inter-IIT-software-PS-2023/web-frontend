@@ -9,6 +9,10 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
+import "../styles/Home.css";
+import img from "../assets/growsimplee.png"
+import { useNavigate } from 'react-router-dom';
+
 const GeneralInstruction = () => {
     return (
         <div style={{ height: "100%", display: "flex", justifyContent: "space-around", flexDirection: "column" }}>
@@ -126,6 +130,7 @@ const steps = [
 ];
 
 export default function VerticalLinearStepper() {
+    const navigate = useNavigate();
     const [activeStep, setActiveStep] = React.useState(0);
 
     const handleNext = () => {
@@ -141,52 +146,60 @@ export default function VerticalLinearStepper() {
     };
 
     return (
-        <Box sx={{ width: "100vw", padding: 8, pt: 4 }}>
-            <Stepper activeStep={activeStep} orientation="vertical">
-                {steps.map((step, index) => (
-                    <Step key={step.label}>
-                        <StepLabel
-                            optional={
-                                index === 3 ? (
-                                    <Typography variant="caption">Last step</Typography>
-                                ) : null
-                            }
-                        >
-                            {step.label}
-                        </StepLabel>
-                        <StepContent>
-                            <Typography style={{ height: "55vh" }}>{step.component}</Typography>
-                            <Box sx={{ mb: 2 }}>
-                                <div>
-                                    <Button
-                                        variant="contained"
-                                        onClick={handleNext}
-                                        sx={{ mt: 1, mr: 1 }}
-                                        disabled={index === 3}
-                                    >
-                                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
-                                    </Button>
-                                    <Button
-                                        disabled={index === 0}
-                                        onClick={handleBack}
-                                        sx={{ mt: 1, mr: 1 }}
-                                    >
-                                        Back
-                                    </Button>
-                                </div>
-                            </Box>
-                        </StepContent>
-                    </Step>
-                ))}
-            </Stepper>
-            {activeStep === steps.length && (
-                <Paper square elevation={0} sx={{ p: 3 }}>
-                    <Typography>All steps completed - you&apos;re finished</Typography>
-                    <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-                        Reset
-                    </Button>
-                </Paper>
-            )}
-        </Box>
+        <div style={{ background: "#f5f5f5" }}>
+            <nav className='nav-home' onClick={() => {
+                navigate("/");
+            }}>
+                <img src={img} alt="" className='logo-img' />
+            </nav>
+            <Box className='homeBody' sx={{ width: "100vw", padding: 8, pt: 4, mt: "55px", background: "#fff" }}>
+                <Stepper activeStep={activeStep} orientation="vertical">
+                    {steps.map((step, index) => (
+                        <Step key={step.label}>
+                            <StepLabel
+                                optional={
+                                    index === 3 ? (
+                                        <Typography variant="caption">Last step</Typography>
+                                    ) : null
+                                }
+                            >
+                                {step.label}
+                            </StepLabel>
+                            <StepContent>
+                                <Typography style={{ height: "55vh" }}>{step.component}</Typography>
+                                <Box sx={{ mb: 2 }}>
+                                    <div>
+                                        <Button
+                                            variant="contained"
+                                            onClick={handleNext}
+                                            sx={{ mt: 1, mr: 1 }}
+                                            disabled={index === 3}
+                                        >
+                                            {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                                        </Button>
+                                        <Button
+                                            disabled={index === 0}
+                                            onClick={handleBack}
+                                            sx={{ mt: 1, mr: 1 }}
+                                        >
+                                            Back
+                                        </Button>
+                                    </div>
+                                </Box>
+                            </StepContent>
+                        </Step>
+                    ))}
+                </Stepper>
+                {activeStep === steps.length && (
+                    <Paper square elevation={0} sx={{ p: 3 }}>
+                        <Typography>All steps completed - you&apos;re finished</Typography>
+                        <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+                            Reset
+                        </Button>
+                    </Paper>
+                )}
+            </Box>
+        </div>
+
     );
 }

@@ -8,26 +8,23 @@ import img6 from '../assets/profile.jpg'
 import img8 from '../assets/shirt.jpg'
 import img9 from '../assets/sunglasses.jpg'
 import SidebarMenu from './Sidebar'
-
+import LineStyle from './Charts/LineStyle'
+import ColumnPlot from './Charts/ColumnPlot'
+import ProgressChart from './Charts/Progress'
+import "../styles/Home.css";
+import img from "../assets/growsimplee.png"
+import { useNavigate } from 'react-router-dom'
 const Dashboard = () => {
+	const navigate = useNavigate()
 	return (
 		<>
 			<SidebarMenu />
 			<section className='home-section'>
-				<nav>
-					<div className='search-box'>
-						<input type='text' placeholder='Search...' />
-						<i className='bx bx-search'></i>
-					</div>
-					<div className='profile-details'>
-						{/* <img src={img6} alt="" /> */}
-						<label htmlFor='xlsx' className='admin_name'>
-							<input id='xlsx' type='file' style={{ display: 'none' }} />
-							Upload File <i className='bx bx-chevron-down'></i>
-						</label>
-					</div>
+				<nav className='nav-home' onClick={() => {
+					navigate("/");
+				}}>
+					<img src={img} alt="" className='logo-img' />
 				</nav>
-
 				<div className='home-content'>
 					<div className='overview-boxes'>
 						<div className='box'>
@@ -207,59 +204,70 @@ const Dashboard = () => {
 										<img src={img9} alt='' />
 										<span className='product'>Vuitton Sunglasses</span>
 									</a>
-									<span className='price'>$1107</span>
+									<span className='price'><ProgressChart /></span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img4} alt='' />
 										<span className='product'>Hourglass Jeans </span>
 									</a>
-									<span className='price'>$1567</span>
+									<span className='price'><ProgressChart /></span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img5} alt='' />
 										<span className='product'>Nike Sport Shoe</span>
 									</a>
-									<span className='price'>$1234</span>
+									<span className='price'><ProgressChart /></span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img6} alt='' />
 										<span className='product'>Hermes Silk Scarves.</span>
 									</a>
-									<span className='price'>$2312</span>
+									<span className='price'><ProgressChart /></span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img3} alt='' />
 										<span className='product'>Succi Ladies Bag</span>
 									</a>
-									<span className='price'>$1456</span>
+									<span className='price'><ProgressChart /></span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img2} alt='' />
 										<span className='product'>Gucci Womens's Bags</span>
 									</a>
-									<span className='price'>$2345</span>
+									<span className='price'><ProgressChart /></span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img1} alt='' />
 										<span className='product'>Addidas Running Shoe</span>
 									</a>
-									<span className='price'>$2345</span>
+									<span className='price'><ProgressChart /></span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img8} alt='' />
 										<span className='product'>Bilack Wear&#39;s Shirt</span>
 									</a>
-									<span className='price'>$1245</span>
+									<span className='price'><ProgressChart /></span>
 								</li>
 							</ul>
 						</div>
+					</div>
+					<div className="charts">
+						<div className="line">
+							<div className='title' style={{ fontSize: "24px", marginBottom: "10px", fontWeight: "500" }}>Package delivered vs Rider</div>
+							<LineStyle />
+						</div>
+						<div className="line">
+							<div className='title' style={{ fontSize: "24px", marginBottom: "10px", fontWeight: "500" }}>Fake Attempt % vs Rider</div>
+							<ColumnPlot />
+						</div>
+
 					</div>
 				</div>
 			</section>

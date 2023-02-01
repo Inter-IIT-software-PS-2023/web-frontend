@@ -2,7 +2,7 @@ import * as XLSX from 'xlsx';
 import '../styles/Csv.css';
 const Csv = () => {
 	const readExcel = async (e: { target: { files: FileList } }) => {
-		const file = e.target.files[0]
+		const file = e.target.files[0] as any
 		const data = await file.arrayBuffer()
 		const workbook = XLSX.read(data)
 		const worksheet = workbook.Sheets[workbook.SheetNames[0]]
@@ -16,7 +16,7 @@ const Csv = () => {
 		<div>
 			<input
 				type='file'
-				onChange={e => {
+				onChange={(e: any) => {
 					e.preventDefault()
 					readExcel(e)
 						.then(data => {
