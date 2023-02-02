@@ -51,7 +51,7 @@ const RiderModal = (props: { open: any; handleClose: any }) => {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{currentRider[0]?.order.map((row: any, index: number) => (
+								{currentRider[0]?.order?.map((row: any, index: number) => (
 									<TableRow
 										key={index}
 										sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

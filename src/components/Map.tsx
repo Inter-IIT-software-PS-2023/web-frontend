@@ -18,7 +18,22 @@ import SideBarModule from './SideBarModule'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import InventoryIcon from '@mui/icons-material/Inventory'
 import '../styles/Popper.css'
-import { Button } from '@mui/material'
+import { Box, Button, Modal, TextField, Typography } from '@mui/material'
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 400,
+	bgcolor: 'background.paper',
+	border: '2px solid #000',
+	boxShadow: 24,
+	p: 4,
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
+	flexDirection: "column"
+};
 const Map = () => {
 	const map: any = useRef(null)
 	const mapContainer = useRef<HTMLDivElement>(null)
@@ -34,6 +49,9 @@ const Map = () => {
 	const handleClose = () => {
 		setOpen(!open)
 	}
+	const [openDynamic, setOpenDynamic] = useState(false);
+	const handleOpenDynamic = () => setOpenDynamic(true);
+	const handleCloseDynamic = () => setOpenDynamic(false);
 	const setMarkers = (Riders = riders) => {
 		console.log(Riders)
 		mapboxgl.accessToken =
@@ -45,7 +63,7 @@ const Map = () => {
 			zoom: zoom,
 		})
 		Riders?.forEach((rider: any, index: number) => {
-			rider.order.forEach((packag: any) => {
+			rider.order?.forEach((packag: any) => {
 				new mapboxgl.Marker({ color: colors[index] })
 					.setLngLat([packag?.address.lng, packag?.address.lat])
 					.setPopup(
@@ -61,7 +79,7 @@ const Map = () => {
 					)
 					.addTo(map.current)
 			})
-			if (rider.order.length > 0) {
+			if (rider.order?.length > 0) {
 				const el = document.createElement('div')
 				el.className = 'marker'
 				el.classList.add('marker')
@@ -114,6 +132,44 @@ const Map = () => {
 			<div className='theme'>
 				<Theme />
 			</div>
+			<div className='dynamic-location'>
+				<Button onClick={handleOpenDynamic} sx={{
+					color: "#000",
+				}}>Dynamic Points</Button>
+				<Modal
+					open={openDynamic}
+					onClose={handleCloseDynamic}
+					aria-labelledby="modal-modal-title"
+					aria-describedby="modal-modal-description"
+				>
+					<Box sx={style}>
+						<Typography id="modal-modal-title" variant="h6" component="h2" sx={{
+							textAlign: "center",
+						}}>
+							Add Dynamic Points
+						</Typography>
+						<TextField
+							id="filled-multiline-static"
+							label="Address"
+							multiline
+							rows={4}
+							defaultValue="Type.."
+							variant="filled"
+							sx={{
+								width: "100%",
+								mt: 2
+							}}
+						/>
+						<Button variant="outlined" sx={{
+							mt: 2
+						}}
+							onClick={
+								handleCloseDynamic
+							}
+						>Submit</Button>
+					</Box>
+				</Modal>
+			</div>
 			<div>
 				<div
 					ref={mapContainer}
@@ -124,8 +180,8 @@ const Map = () => {
 			<div
 				style={{
 					position: 'absolute',
-					bottom: '60px',
-					right: '0',
+					bottom: '110px',
+					right: '14px',
 					zIndex: '99999',
 				}}
 			>
