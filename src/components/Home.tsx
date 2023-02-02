@@ -281,19 +281,19 @@ export default function VerticalLinearStepper() {
 	]
 
 	const handleNext = () => {
-		if (activeStep === 1) {
-			if (feedValidateRider && feedValidateUpload) {
+		if (activeStep === 2) {
+			if (genValidateRider && feedValidateRider) {
 				setActiveStep(prevActiveStep => prevActiveStep + 1)
 			} else {
 				if (!feedValidateRider) {
 					alert('Enter Rider count')
-				} else if (!feedValidateUpload) {
-					alert('Failed Upload')
+				} else if (!genValidateRider) {
+					alert('Failed to Create')
 				}
 			}
-		} else if (activeStep === 2) {
-			if (!genValidateRider) {
-				alert('Rider not generated')
+		} else if (activeStep === 1) {
+			if (!feedValidateUpload) {
+				alert('Failed to Upload')
 				return
 			}
 			setActiveStep(prevActiveStep => prevActiveStep + 1)
