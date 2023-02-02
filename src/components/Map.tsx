@@ -11,7 +11,7 @@ import RiderModal from './RiderModal'
 import { Theme } from '../store/features/themeToggle/ToggleTheme'
 import { useAppSelector } from '../store/app/Hooks'
 import { riderSelector } from '../store/features/Rider'
-import { updateRoute } from '../services/mapServices'
+import { updateRoute, draw } from '../services/mapServices'
 import { themeSelector } from '../store/features/themeToggle/Toggle'
 import { colors } from '../utils/colors'
 import SideBarModule from './SideBarModule'
@@ -30,7 +30,6 @@ const Map = () => {
 	const theme = useAppSelector(themeSelector)
 	const currentRider = useAppSelector(riderSelector).currentRider
 	const riders = useAppSelector(riderSelector).rider
-	console.log(riders);
 	const [open, setOpen] = useState(false)
 	const handleClose = () => {
 		setOpen(!open)
@@ -43,7 +42,7 @@ const Map = () => {
 			center: [lat, lng],
 			zoom: zoom,
 		})
-		Riders.forEach((rider: any, index: number) => {
+		Riders?.forEach((rider: any, index: number) => {
 			rider.package.forEach((packag: any) => {
 				new mapboxgl.Marker({ color: colors[index] })
 					.setLngLat([packag.lng, packag.lat])
@@ -91,7 +90,7 @@ const Map = () => {
 		// Actions on map
 		map.current.addControl(search, 'top-right')
 		map.current.addControl(new mapboxgl.NavigationControl())
-		// map.current.addControl(draw)
+		map.current.addControl(draw)
 		map.current.on('draw.create', updateRoute)
 		map.current.on('draw.update', updateRoute)
 		setMap(map.current)
@@ -117,6 +116,8 @@ const Map = () => {
 					className='map.current-container'
 					style={{ height: '100vh', width: '100vw' }}
 				/>
+			</div>
+			<div>
 				<Button
 					variant='contained'
 					sx={{
@@ -128,11 +129,6 @@ const Map = () => {
 						zIndex: '3',
 						backgroundColor: 'white',
 						color: 'black',
-						boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
-						'&:hover': {
-							backgroundColor: 'white',
-							boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
-						},
 					}}
 					onClick={() => {
 						if (currentRider.length === 0) {
@@ -155,11 +151,6 @@ const Map = () => {
 						zIndex: '3',
 						backgroundColor: 'white',
 						color: 'black',
-						boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
-						'&:hover': {
-							backgroundColor: 'white',
-							boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
-						},
 					}}
 					onClick={() => handleClose()}
 				>

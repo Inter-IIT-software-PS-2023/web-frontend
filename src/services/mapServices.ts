@@ -1,7 +1,6 @@
-import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import { length, along } from '@turf/turf'
 import mapboxgl from 'mapbox-gl'
-
+import MapboxDraw from '@mapbox/mapbox-gl-draw'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const addRoute = (map: any, coords: any) => {
 	if (map.getSource('route')) {
@@ -25,15 +24,13 @@ const addRoute = (map: any, coords: any) => {
 			},
 			paint: {
 				'line-color': '#011f4b',
-				'line-width': 8,
+				'line-width': 1,
 				'line-opacity': 0.8,
 			},
 		})
 	}
 }
-
 // draw
-
 const draw = new MapboxDraw({
 	displayControlsDefault: false,
 	controls: {
@@ -87,7 +84,6 @@ const draw = new MapboxDraw({
 		},
 	],
 })
-
 // updateRoute
 
 function updateRoute(currentRider: any, map: any, marker: any) {
@@ -172,4 +168,4 @@ function removeRoute(map: any) {
 	map.removeSource('route')
 }
 
-export { addRoute, draw, updateRoute, removeRoute }
+export { addRoute, updateRoute, removeRoute ,draw}

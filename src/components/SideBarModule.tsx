@@ -15,6 +15,7 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../store/app/Hooks'
 import { Rider, riderSelector, setCurrentRider } from '../store/features/Rider'
+import { colors } from '../utils/colors'
 import '../styles/Sidebar.css'
 
 const SideBarModule = () => {
@@ -82,7 +83,7 @@ const SideBarModule = () => {
 					</div>
 					<SearchBar />
 					<div className='riders'>
-						{Rider?.map((rider: Rider) => {
+						{Rider?.map((rider: Rider, index: number) => {
 							return (
 								<div
 									key={rider.id}
@@ -93,7 +94,14 @@ const SideBarModule = () => {
 								>
 									<AccountCircleIcon />
 									<div className='rider-name'>{rider.name}</div>
-									<CircleIcon />
+									<div
+										style={{
+											backgroundColor: colors[index],
+											width: '20px',
+											height: '20px',
+											borderRadius: '500%',
+										}}
+									></div>
 								</div>
 							)
 						})}

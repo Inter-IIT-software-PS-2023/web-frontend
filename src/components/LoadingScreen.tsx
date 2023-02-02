@@ -12,6 +12,7 @@ const LoadingScreen = () => {
 			}}
 		>
 			<img src={gif} alt='' />
+			
 		</div>
 	)
 }
