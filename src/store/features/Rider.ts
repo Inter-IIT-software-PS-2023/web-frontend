@@ -1,22 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../app/Store'
-import { Rider } from '../../makeData/geo'
 export interface Rider {
-	id: number
-	name: string
+	id: string
+	riderId: string
+	endTime: number
 	position: {
 		lat: number
 		lng: number
 	}
-	package: Array<{
-		product_id: string
-		address: string
-		location: string
-		lng: number
-		lat: number
-		customer_name: string
-		customer_phone: number
+	order: Array<{
+		id: string
+		productId: string
+		name: string
+		status: string
+		awb: string
+		reachTime: number
+		clusterId: string
+		address: {
+			id: string
+			address: string
+			location: string
+			lat: number
+			lng: number
+			orderId: string
+		}
 	}>
+	rider: {
+		id: string
+		username: string
+		password: string
+	}
 }
 
 interface RiderState {
@@ -24,7 +37,7 @@ interface RiderState {
 	currentRider: Array<Rider>
 }
 const initialState: RiderState = {
-	rider: Rider,
+	rider: [],
 	currentRider: [],
 }
 
@@ -35,9 +48,12 @@ export const riderSlice = createSlice({
 		setCurrentRider: (state, action) => {
 			state.currentRider = action.payload
 		},
+		setRider: (state, action) => {
+			state.rider = action.payload
+		},
 	},
 })
 
-export const { setCurrentRider } = riderSlice.actions
+export const { setCurrentRider, setRider } = riderSlice.actions
 export const riderSelector = (state: RootState) => state.rider
 export default riderSlice.reducer
