@@ -90,7 +90,7 @@ const Map = () => {
 		// Actions on map
 		map.current.addControl(search, 'top-right')
 		map.current.addControl(new mapboxgl.NavigationControl())
-		map.current.addControl(draw)
+		// map.current.addControl(draw)
 		map.current.on('draw.create', updateRoute)
 		map.current.on('draw.update', updateRoute)
 		setMap(map.current)
