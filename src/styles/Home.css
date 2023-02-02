@@ -13,3 +13,13 @@
     width: 226px;
     cursor: pointer;
 }
+
+.dynamic-location {
+    position: absolute;
+    z-index: 999;
+    bottom: 58px;
+    right: 10px;
+    background: #fff;
+    border: 0.5px solid black;
+    color: #fff;
+}
