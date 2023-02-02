@@ -204,7 +204,7 @@ export default function VerticalLinearStepper() {
 				</div>
 				<div
 					style={{
-						height: '100%',
+						height: '60%',
 						display: 'flex',
 						justifyContent: 'space-around',
 						flexDirection: 'column',
@@ -215,6 +215,7 @@ export default function VerticalLinearStepper() {
 						operation. A pair of credentials will be generated for each rider which
 						can be use to sign in to the rider app to keep a track of all the orders
 						one has to deliver.
+
 					</p>
 					<Button variant='outlined' sx={{ height: '50px' }} onClick={riderApi}>
 						Generate
