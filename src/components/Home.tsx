@@ -313,7 +313,7 @@ export default function VerticalLinearStepper() {
 			>
 				<img src={img} alt='' className='logo-img' />
 			</nav>
-			<Box sx={{ width: '100vw', padding: 8, pt: 4 }}>
+			<Box sx={{ width: '100vw', padding: 8, pt: 4, mt: 8 }}>
 				<Stepper activeStep={activeStep} orientation='vertical'>
 					{steps.map((step, index) => (
 						<Step key={step.label}>

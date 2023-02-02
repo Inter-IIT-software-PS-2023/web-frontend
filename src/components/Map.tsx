@@ -118,16 +118,21 @@ const Map = () => {
 					style={{ height: '100vh', width: '100vw' }}
 				/>
 			</div>
-			<div>
+			<div style={{
+				height: '160px',
+				position: 'absolute',
+				bottom: '10px',
+				right: '0',
+				zIndex: '9999',
+				display: " flex",
+				justifyContent: "space-around",
+				flexDirection: "column",
+			}}>
 				<Button
 					variant='contained'
 					sx={{
 						borderRadius: '50%',
 						height: '60px',
-						position: 'absolute',
-						bottom: '10px',
-						right: '0',
-						zIndex: '3',
 						backgroundColor: 'white',
 						color: 'black',
 					}}
@@ -143,17 +148,14 @@ const Map = () => {
 				</Button>
 				<Button
 					variant='contained'
+
+					onClick={() => handleClose()}
 					sx={{
 						borderRadius: '50%',
 						height: '60px',
-						position: 'absolute',
-						bottom: '90px',
-						right: '0',
-						zIndex: '3',
 						backgroundColor: 'white',
 						color: 'black',
 					}}
-					onClick={() => handleClose()}
 				>
 					<InventoryIcon />
 				</Button>
