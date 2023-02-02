@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography'
 import { TextField } from '@mui/material'
 import UploadFileIcon from '@mui/icons-material/UploadFile'
 import { useNavigate } from 'react-router-dom'
+import { setRider } from '../store/features/Rider'
+import { useAppDispatch } from '../store/app/Hooks'
 import * as XLSX from 'xlsx'
 import img from '../assets/growsimplee.png'
 export default function VerticalLinearStepper() {
@@ -30,6 +32,7 @@ export default function VerticalLinearStepper() {
 	const [feedValidateUpload, setFeedValidateUpload] = useState(false)
 	const [genValidateRider, setGenValidateRider] = useState(false)
 	const [riderCount, setRiderCount] = useState(0)
+	const dispatch = useAppDispatch()
 	const GeneralInstruction = () => {
 		return (
 			<div
@@ -87,44 +90,7 @@ export default function VerticalLinearStepper() {
 						height: '120px',
 					}}
 				>
-					<p>
-						Input the number of riders and the excel sheet containing all the order
-						details.
-					</p>
-					<TextField
-						id='standard-number'
-						label='Number'
-						type='number'
-						value={riderCount}
-						onChange={e => {
-							if (isNaN(parseInt(e.target.value))) {
-								setFeedValidateRider(false)
-								setRiderCount(0)
-								return
-							}
-							if (parseInt(e.target.value) <= 0) {
-								setFeedValidateRider(false)
-								return
-							}
-							setFeedValidateRider(true)
-							setRiderCount(parseInt(e.target.value))
-						}}
-						variant='standard'
-					/>
-				</div>
-				<div
-					style={{
-						width: '100%',
-						display: 'flex',
-						justifyContent: 'space-around',
-						flexDirection: 'column',
-						height: '120px',
-					}}
-				>
-					<p>
-						Input the number of riders and the excel sheet containing all the order
-						details.
-					</p>
+					<p>Input the excel sheet containing all the order details.</p>
 					<div
 						style={{
 							height: '50px',
@@ -153,11 +119,12 @@ export default function VerticalLinearStepper() {
 								id='xlsx'
 								type='file'
 								style={{ display: 'none', cursor: 'pointer' }}
+								// eslint-disable-next-line @typescript-eslint/no-explicit-any
 								onChange={(e: any) => {
 									e.preventDefault()
 									readExcel(e)
 										.then(data => {
-											fetch('http://localhost:8000/orders/new', {
+											fetch(`${import.meta.env.VITE_BACKEND_URL}/orders/new`, {
 												method: 'POST',
 												body: JSON.stringify(data),
 												headers: {
@@ -166,7 +133,8 @@ export default function VerticalLinearStepper() {
 											})
 												.then(resp => resp.json())
 												.then(data => {
-													console.log(data), setFeedValidateUpload(true)
+													console.log(data)
+													setFeedValidateUpload(true)
 												})
 												.catch(err => console.log(err))
 										})
@@ -186,16 +154,13 @@ export default function VerticalLinearStepper() {
 
 	const GenerateRiders = () => {
 		const riderApi = async () => {
-			await fetch(
-				'http://ec2-65-0-182-19.ap-south-1.compute.amazonaws.com:8000/rider/new',
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({ RiderCount: riderCount }),
-				}
-			)
+			await fetch(`${import.meta.env.VITE_BACKEND_URL}/rider/new`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ num: riderCount }),
+			})
 				.then(() => {
 					setGenValidateRider(true)
 				})
@@ -205,24 +170,57 @@ export default function VerticalLinearStepper() {
 				})
 		}
 		return (
-			<div
-				style={{
-					height: '100%',
-					display: 'flex',
-					justifyContent: 'space-around',
-					flexDirection: 'column',
-				}}
-			>
-				<p>
-					Click on the button to generate riders for the last mile delivery
-					operation. A pair of credentials will be generated for each rider which can
-					be use to sign in to the rider app to keep a track of all the orders one
-					has to deliver.
-				</p>
-				<Button variant='outlined' sx={{ height: '50px' }} onClick={riderApi}>
-					Generate
-				</Button>
-			</div>
+			<>
+				<div
+					style={{
+						width: '100%',
+						display: 'flex',
+						justifyContent: 'space-around',
+						flexDirection: 'column',
+						height: '120px',
+					}}
+				>
+					<p>Input the number of riders</p>
+					<TextField
+						id='standard-number'
+						label='Number'
+						type='number'
+						value={riderCount}
+						onChange={e => {
+							if (isNaN(parseInt(e.target.value))) {
+								setFeedValidateRider(false)
+								setRiderCount(0)
+								return
+							}
+							if (parseInt(e.target.value) <= 0) {
+								setFeedValidateRider(false)
+								return
+							}
+							setFeedValidateRider(true)
+							setRiderCount(parseInt(e.target.value))
+						}}
+						variant='standard'
+					/>
+				</div>
+				<div
+					style={{
+						height: '100%',
+						display: 'flex',
+						justifyContent: 'space-around',
+						flexDirection: 'column',
+					}}
+				>
+					<p>
+						Click on the button to generate riders for the last mile delivery
+						operation. A pair of credentials will be generated for each rider which
+						can be use to sign in to the rider app to keep a track of all the orders
+						one has to deliver.
+					</p>
+					<Button variant='outlined' sx={{ height: '50px' }} onClick={riderApi}>
+						Generate
+					</Button>
+				</div>
+			</>
 		)
 	}
 
@@ -244,7 +242,16 @@ export default function VerticalLinearStepper() {
 				<Button
 					variant='contained'
 					sx={{ height: '50px' }}
-					onClick={() => {
+					onClick={async () => {
+						await fetch(`${import.meta.env.VITE_BACKEND_URL}/riders/routing`)
+							.then(res => res.json())
+							.then(res => {
+								dispatch(setRider(res))
+								console.log(res)
+							})
+							.catch(err => {
+								console.log(err)
+							})
 						navigate('/loading')
 					}}
 				>
@@ -313,7 +320,7 @@ export default function VerticalLinearStepper() {
 			>
 				<img src={img} alt='' className='logo-img' />
 			</nav>
-			<Box sx={{ width: '100vw', padding: 8, pt: 4 }}>
+			<Box sx={{ width: '100vw', padding: 8, pt: 4, mt: 8 }}>
 				<Stepper activeStep={activeStep} orientation='vertical'>
 					{steps.map((step, index) => (
 						<Step key={step.label}>

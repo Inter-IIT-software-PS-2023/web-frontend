@@ -89,10 +89,9 @@ const draw = new MapboxDraw({
 function updateRoute(currentRider: any, map: any, marker: any) {
 	removeRoute(map)
 	const profile = 'driving'
-	const coords = currentRider?.package.map((item: any) => {
-		return [item.lng, item.lat]
+	const coords = currentRider?.order.map((item: any) => {
+		return [item.address.lng, item.address.lat]
 	})
-	coords.unshift([currentRider?.position.lng, currentRider?.position.lat])
 	const newCoords = coords.join(';')
 	const radius = coords.map(() => 20)
 	getMatch(newCoords, radius, profile, map, marker)
@@ -168,4 +167,4 @@ function removeRoute(map: any) {
 	map.removeSource('route')
 }
 
-export { addRoute, updateRoute, removeRoute ,draw}
+export { addRoute, updateRoute, removeRoute, draw }

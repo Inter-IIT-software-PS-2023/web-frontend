@@ -11,7 +11,7 @@ import RiderModal from './RiderModal'
 import { Theme } from '../store/features/themeToggle/ToggleTheme'
 import { useAppSelector } from '../store/app/Hooks'
 import { riderSelector } from '../store/features/Rider'
-import { updateRoute, draw } from '../services/mapServices'
+import { updateRoute } from '../services/mapServices'
 import { themeSelector } from '../store/features/themeToggle/Toggle'
 import { colors } from '../utils/colors'
 import SideBarModule from './SideBarModule'
@@ -35,6 +35,7 @@ const Map = () => {
 		setOpen(!open)
 	}
 	const setMarkers = (Riders = riders) => {
+		console.log(Riders)
 		mapboxgl.accessToken =
 			'pk.eyJ1IjoiaXNodTExNDQwNyIsImEiOiJjbGNpcHdqdjkwMnplM29xbXJjdXRoM3hiIn0.7bDoT4N8RAglxqUzf8lKvg'
 		map.current = new mapboxgl.Map({
@@ -44,41 +45,43 @@ const Map = () => {
 			zoom: zoom,
 		})
 		Riders?.forEach((rider: any, index: number) => {
-			rider.package.forEach((packag: any) => {
+			rider.order.forEach((packag: any) => {
 				new mapboxgl.Marker({ color: colors[index] })
-					.setLngLat([packag.lng, packag.lat])
+					.setLngLat([packag?.address.lng, packag?.address.lat])
 					.setPopup(
 						new mapboxgl.Popup({ offset: 25 }) // add popups
 							.setHTML(
 								`<div style=background-color:white;width:150px;height:100px>
-								<h4 style=text-align:center>Name : ${packag.product_id}</h4>
-								<div style=text-align:center >${packag.customer_name} </div>
-								<div style=text-align:center >Latitude: ${packag.lat} </div>
-								<div style=text-align:center >Longitude: ${packag.lng} </div>
+								<h4 style=text-align:center>Name : ${packag.productId}</h4>
+								<div style=text-align:center >${packag.name} </div>
+								<div style=text-align:center >Latitude: ${packag.address.lat} </div>
+								<div style=text-align:center >Longitude: ${packag.address.lng} </div>
 								</div>`
 							)
 					)
 					.addTo(map.current)
 			})
-			const el = document.createElement('div')
-			el.className = 'marker'
-			el.classList.add('marker')
-			const marker = new mapboxgl.Marker(el)
-				.setLngLat([rider.position.lng, rider.position.lat])
-				.setPopup(
-					new mapboxgl.Popup({ offset: 25 }) // add popups
-						.setHTML(
-							`<div style=background-color:white;width:150px;height:100px >
-								<h4 style=text-align:center>Name : ${rider.name}</h4>
-								<div style=text-align:center >Package delivered: ${rider.package.length} </div>
-								<div style=text-align:center >Package left: 0 </div>
-								<div style=text-align:center >Latitude: ${rider.position.lat} </div>
-								<div style=text-align:center >Longitude: ${rider.position.lng} </div>
-								</div>	`
-						)
-				)
-				.addTo(map.current)
-			setMarker(marker)
+			if (rider.order.length > 0) {
+				const el = document.createElement('div')
+				el.className = 'marker'
+				el.classList.add('marker')
+				const marker = new mapboxgl.Marker(el)
+					.setLngLat([rider.order[0]?.address.lng, rider.order[0]?.address.lat])
+					.setPopup(
+						new mapboxgl.Popup({ offset: 25 }) // add popups
+							.setHTML(
+								`<div style=background-color:white;width:150px;height:100px >
+									<h4 style=text-align:center>Name : ${rider.rider.username}</h4>
+									<div style=text-align:center >Package delivered: ${rider.order.length} </div>
+									<div style=text-align:center >Package left: 0 </div>
+									<div style=text-align:center >Latitude: ${rider.order[0].address.lat} </div>
+									<div style=text-align:center >Longitude: ${rider.order[0].address.lng} </div>
+									</div>	`
+							)
+					)
+					.addTo(map.current)
+				setMarker(marker)
+			}
 		})
 
 		const search = new MapBoxGeocoder({
@@ -92,8 +95,8 @@ const Map = () => {
 		map.current.addControl(search, 'top-right')
 		map.current.addControl(new mapboxgl.NavigationControl())
 		// map.current.addControl(draw)
-		map.current.on('draw.create', updateRoute)
-		map.current.on('draw.update', updateRoute)
+		// map.current.on('draw.create', updateRoute)
+		// map.current.on('draw.update', updateRoute)
 		setMap(map.current)
 	}
 
@@ -118,18 +121,22 @@ const Map = () => {
 					style={{ height: '100vh', width: '100vw' }}
 				/>
 			</div>
-			<div>
+			<div
+				style={{
+					position: 'absolute',
+					bottom: '60px',
+					right: '0',
+					zIndex: '99999',
+				}}
+			>
 				<Button
 					variant='contained'
 					sx={{
 						borderRadius: '50%',
 						height: '60px',
-						position: 'absolute',
-						bottom: '10px',
-						right: '0',
-						zIndex: '3',
 						backgroundColor: 'white',
 						color: 'black',
+						marginRight: '3px',
 					}}
 					onClick={() => {
 						if (currentRider.length === 0) {
@@ -146,10 +153,6 @@ const Map = () => {
 					sx={{
 						borderRadius: '50%',
 						height: '60px',
-						position: 'absolute',
-						bottom: '90px',
-						right: '0',
-						zIndex: '3',
 						backgroundColor: 'white',
 						color: 'black',
 					}}

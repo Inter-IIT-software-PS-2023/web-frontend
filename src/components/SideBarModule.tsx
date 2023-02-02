@@ -86,17 +86,17 @@ const SideBarModule = () => {
 						{Rider?.map((rider: Rider, index: number) => {
 							return (
 								<div
-									key={rider.id}
+									key={index}
 									className='rider-info'
 									onClick={() => {
 										dispatch(setCurrentRider([rider]))
 									}}
 								>
 									<AccountCircleIcon />
-									<div className='rider-name'>{rider.name}</div>
+									<div className='rider-name'>{rider.rider.username}</div>
 									<div
 										style={{
-											backgroundColor: colors[index],
+											backgroundColor: rider.order.length === 0 ? 'red' : colors[index],
 											width: '20px',
 											height: '20px',
 											borderRadius: '500%',

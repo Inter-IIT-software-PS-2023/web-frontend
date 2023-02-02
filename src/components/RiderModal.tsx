@@ -51,18 +51,18 @@ const RiderModal = (props: { open: any; handleClose: any }) => {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{currentRider[0]?.package.map((row: any, index: number) => (
+								{currentRider[0]?.order.map((row: any, index: number) => (
 									<TableRow
 										key={index}
 										sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 									>
 										<TableCell component='th' scope='row'>
-											{row.customer_name}
+											{row.name}
 										</TableCell>
-										<TableCell align='right'>{row.product_id}</TableCell>
-										<TableCell align='right'>{row.location}</TableCell>
-										<TableCell align='right'>{row.lat}</TableCell>
-										<TableCell align='right'>{row.lng}</TableCell>
+										<TableCell align='right'>{row.productId}</TableCell>
+										<TableCell align='right'>{row.address.location}</TableCell>
+										<TableCell align='right'>{row.address.lat}</TableCell>
+										<TableCell align='right'>{row.address.lng}</TableCell>
 										{/* <TableCell align='right'>{row.fat}</TableCell>
 										<TableCell align='right'>{row.carbs}</TableCell>
 										<TableCell align='right'>{row.protein}</TableCell> */}
