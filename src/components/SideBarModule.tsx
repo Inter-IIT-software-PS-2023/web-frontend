@@ -1,7 +1,6 @@
 import SearchBar from 'material-ui-search-bar'
 import { useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import CircleIcon from '@mui/icons-material/Circle'
 import {
 	Sidebar,
 	Menu,
@@ -17,6 +16,7 @@ import { useAppSelector, useAppDispatch } from '../store/app/Hooks'
 import { Rider, riderSelector, setCurrentRider } from '../store/features/Rider'
 import { colors } from '../utils/colors'
 import '../styles/Sidebar.css'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 const SideBarModule = () => {
 	const dispatch = useAppDispatch()
@@ -72,6 +72,23 @@ const SideBarModule = () => {
 							}}
 						>
 							Dashboard
+						</MenuItem>
+						<MenuItem
+							icon={<DeleteForeverIcon />}
+							onClick={async () => {
+								await fetch(
+									'http://ec2-65-0-182-19.ap-south-1.compute.amazonaws.com:8000/orders/clear'
+								)
+									.then(res => {
+										console.log(res)
+										navigate('/')
+									})
+									.catch(err => {
+										console.log(err)
+									})
+							}}
+						>
+							Clear DB
 						</MenuItem>
 					</Menu>
 				</Sidebar>

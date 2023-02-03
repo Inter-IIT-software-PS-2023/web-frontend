@@ -124,13 +124,16 @@ export default function VerticalLinearStepper() {
 									e.preventDefault()
 									readExcel(e)
 										.then(data => {
-											fetch(`${import.meta.env.VITE_BACKEND_URL}/orders/new`, {
-												method: 'POST',
-												body: JSON.stringify(data),
-												headers: {
-													'Content-Type': 'application/json',
-												},
-											})
+											fetch(
+												'http://ec2-65-0-182-19.ap-south-1.compute.amazonaws.com:8000/orders/new',
+												{
+													method: 'POST',
+													body: JSON.stringify(data),
+													headers: {
+														'Content-Type': 'application/json',
+													},
+												}
+											)
 												.then(resp => resp.json())
 												.then(data => {
 													console.log(data)
@@ -154,13 +157,16 @@ export default function VerticalLinearStepper() {
 
 	const GenerateRiders = () => {
 		const riderApi = async () => {
-			await fetch(`${import.meta.env.VITE_BACKEND_URL}/rider/new`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ num: riderCount }),
-			})
+			await fetch(
+				'http://ec2-65-0-182-19.ap-south-1.compute.amazonaws.com:8000/riders/new'
+				// {
+				// 	method: 'POST',
+				// 	headers: {
+				// 		'Content-Type': 'application/json',
+				// 	},
+				// 	body: JSON.stringify({ num: riderCount }),
+				// }
+			)
 				.then(() => {
 					setGenValidateRider(true)
 				})
@@ -177,7 +183,8 @@ export default function VerticalLinearStepper() {
 						display: 'flex',
 						justifyContent: 'space-around',
 						flexDirection: 'column',
-						height: '120px',
+						height: '40px',
+						marginTop: '10px',
 					}}
 				>
 					<p>Input the number of riders</p>
@@ -243,7 +250,9 @@ export default function VerticalLinearStepper() {
 					variant='contained'
 					sx={{ height: '50px' }}
 					onClick={async () => {
-						await fetch(`${import.meta.env.VITE_BACKEND_URL}/riders/routing`)
+						await fetch(
+							'http://ec2-65-0-182-19.ap-south-1.compute.amazonaws.com:8000/riders/routing'
+						)
 							.then(res => res.json())
 							.then(res => {
 								dispatch(setRider(res))
