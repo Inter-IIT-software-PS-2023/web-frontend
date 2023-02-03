@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useState, useEffect } from 'react'
-import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import '../styles/MapDisplay.css'
 import '../styles/Marker.css'
 import mapboxgl from 'mapbox-gl'
-import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import RiderModal from './RiderModal'
 import { Theme } from '../store/features/themeToggle/ToggleTheme'
 import { useAppSelector } from '../store/app/Hooks'
@@ -29,11 +29,11 @@ const style = {
 	border: '2px solid #000',
 	boxShadow: 24,
 	p: 4,
-	display: "flex",
-	justifyContent: "center",
-	alignItems: "center",
-	flexDirection: "column"
-};
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+	flexDirection: 'column',
+}
 const Map = () => {
 	const map: any = useRef(null)
 	const mapContainer = useRef<HTMLDivElement>(null)
@@ -49,9 +49,9 @@ const Map = () => {
 	const handleClose = () => {
 		setOpen(!open)
 	}
-	const [openDynamic, setOpenDynamic] = useState(false);
-	const handleOpenDynamic = () => setOpenDynamic(true);
-	const handleCloseDynamic = () => setOpenDynamic(false);
+	const [openDynamic, setOpenDynamic] = useState(false)
+	const handleOpenDynamic = () => setOpenDynamic(true)
+	const handleCloseDynamic = () => setOpenDynamic(false)
 	const setMarkers = (Riders = riders) => {
 		console.log(Riders)
 		mapboxgl.accessToken =
@@ -133,40 +133,52 @@ const Map = () => {
 				<Theme />
 			</div>
 			<div className='dynamic-location'>
-				<Button onClick={handleOpenDynamic} sx={{
-					color: "#000",
-				}}>Dynamic Points</Button>
+				<Button
+					onClick={handleOpenDynamic}
+					sx={{
+						color: '#000',
+					}}
+				>
+					Dynamic Points
+				</Button>
 				<Modal
 					open={openDynamic}
 					onClose={handleCloseDynamic}
-					aria-labelledby="modal-modal-title"
-					aria-describedby="modal-modal-description"
+					aria-labelledby='modal-modal-title'
+					aria-describedby='modal-modal-description'
 				>
 					<Box sx={style}>
-						<Typography id="modal-modal-title" variant="h6" component="h2" sx={{
-							textAlign: "center",
-						}}>
+						<Typography
+							id='modal-modal-title'
+							variant='h6'
+							component='h2'
+							sx={{
+								textAlign: 'center',
+							}}
+						>
 							Add Dynamic Points
 						</Typography>
 						<TextField
-							id="filled-multiline-static"
-							label="Address"
+							id='filled-multiline-static'
+							label='Address'
 							multiline
+							placeholder='Type..'
 							rows={4}
-							defaultValue="Type.."
-							variant="filled"
+							variant='filled'
 							sx={{
-								width: "100%",
-								mt: 2
+								width: '100%',
+								mt: 2,
 							}}
 						/>
-						<Button variant="outlined" sx={{
-							mt: 2
-						}}
-							onClick={
-								handleCloseDynamic
-							}
-						>Submit</Button>
+						<Button
+							variant='outlined'
+							sx={{
+								mt: 2,
+							}}
+							onClick={handleCloseDynamic}
+						>
+							Submit
+						</Button>
 					</Box>
 				</Modal>
 			</div>
@@ -206,7 +218,6 @@ const Map = () => {
 				</Button>
 				<Button
 					variant='contained'
-
 					onClick={() => handleClose()}
 					sx={{
 						borderRadius: '50%',
