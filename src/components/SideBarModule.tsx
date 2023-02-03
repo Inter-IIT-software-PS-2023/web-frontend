@@ -110,10 +110,10 @@ const SideBarModule = () => {
 									}}
 								>
 									<AccountCircleIcon />
-									<div className='rider-name'>{rider.rider.username}</div>
+									<div className='rider-name'>{rider!.rider?.username}</div>
 									<div
 										style={{
-											backgroundColor: rider.order.length === 0 ? 'red' : colors[index],
+											backgroundColor: rider!.order?.length === 0 ? 'red' : colors[index],
 											width: '20px',
 											height: '20px',
 											borderRadius: '500%',
