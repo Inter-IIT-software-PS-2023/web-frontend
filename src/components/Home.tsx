@@ -158,14 +158,14 @@ export default function VerticalLinearStepper() {
 	const GenerateRiders = () => {
 		const riderApi = async () => {
 			await fetch(
-				'https://growwsimplee.coursepanel.in/riders/new'
-				// {
-				// 	method: 'POST',
-				// 	headers: {
-				// 		'Content-Type': 'application/json',
-				// 	},
-				// 	body: JSON.stringify({ num: riderCount }),
-				// }
+				'https://growwsimplee.coursepanel.in/riders/new',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ num: riderCount }),
+				}
 			)
 				.then(() => {
 					setGenValidateRider(true)
@@ -245,7 +245,7 @@ export default function VerticalLinearStepper() {
 				<p>
 					Click on the button to start the last mile delivery operation. This will
 					cluster orders that each rider has to deliver along with the route one has
-					to travel.{' '}
+					to travel.
 				</p>
 				<Button
 					variant='contained'

@@ -1,5 +1,5 @@
 import SearchBar from 'material-ui-search-bar'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import {
 	Sidebar,
@@ -76,9 +76,7 @@ const SideBarModule = () => {
 						<MenuItem
 							icon={<DeleteForeverIcon />}
 							onClick={async () => {
-								await fetch(
-									'https://growwsimplee.coursepanel.in/orders/clear'
-								)
+								await fetch('https://growwsimplee.coursepanel.in/orders/clear')
 									.then(res => {
 										console.log(res)
 										navigate('/')
@@ -110,15 +108,17 @@ const SideBarModule = () => {
 									}}
 								>
 									<AccountCircleIcon />
-									<div className='rider-name'>{rider!.rider?.username}</div>
-									<div
-										style={{
-											backgroundColor: rider!.order?.length === 0 ? 'red' : colors[index],
-											width: '20px',
-											height: '20px',
-											borderRadius: '500%',
-										}}
-									></div>
+									<div className='rider-name'>{rider?.rider?.username}</div>
+									{rider?.order.length === 0 ? null : (
+										<div
+											style={{
+												backgroundColor: colors[index],
+												width: '20px',
+												height: '20px',
+												borderRadius: '500%',
+											}}
+										></div>
+									)}
 								</div>
 							)
 						})}

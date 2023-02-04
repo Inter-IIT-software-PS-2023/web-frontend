@@ -24,7 +24,7 @@ const addRoute = (map: any, coords: any) => {
 			},
 			paint: {
 				'line-color': '#011f4b',
-				'line-width': 1,
+				'line-width': 8,
 				'line-opacity': 0.8,
 			},
 		})

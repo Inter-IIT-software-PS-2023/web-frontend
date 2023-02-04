@@ -59,7 +59,7 @@ const Map = () => {
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current || '',
 			style: theme,
-			center: [lat, lng],
+			center: [Riders[0].order[0]?.address.lng, Riders[0].order[0]?.address.lat],
 			zoom: zoom,
 		})
 		Riders?.forEach((rider: any, index: number) => {
