@@ -1,5 +1,5 @@
 import SearchBar from 'material-ui-search-bar'
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import {
 	Sidebar,
