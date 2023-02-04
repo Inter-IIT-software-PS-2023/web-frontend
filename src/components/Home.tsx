@@ -158,14 +158,14 @@ export default function VerticalLinearStepper() {
 	const GenerateRiders = () => {
 		const riderApi = async () => {
 			await fetch(
-				'https://growwsimplee.coursepanel.in/riders/new'
-				// {
-				// 	method: 'POST',
-				// 	headers: {
-				// 		'Content-Type': 'application/json',
-				// 	},
-				// 	body: JSON.stringify({ num: riderCount }),
-				// }
+				'https://growwsimplee.coursepanel.in/riders/new',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ num: riderCount }),
+				}
 			)
 				.then(() => {
 					setGenValidateRider(true)
