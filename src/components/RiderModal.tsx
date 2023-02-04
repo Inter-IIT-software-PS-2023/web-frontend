@@ -59,10 +59,10 @@ const RiderModal = (props: { open: any; handleClose: any }) => {
 										<TableCell component='th' scope='row'>
 											{row.name}
 										</TableCell>
-										<TableCell align='right'>{row.productId}</TableCell>
-										<TableCell align='right'>{row.address.location}</TableCell>
-										<TableCell align='right'>{row.address.lat}</TableCell>
-										<TableCell align='right'>{row.address.lng}</TableCell>
+										<TableCell align='right'>{row?.productId}</TableCell>
+										<TableCell align='right'>{row?.address?.location}</TableCell>
+										<TableCell align='right'>{row?.address?.lat}</TableCell>
+										<TableCell align='right'>{row?.address?.lng}</TableCell>
 										{/* <TableCell align='right'>{row.fat}</TableCell>
 										<TableCell align='right'>{row.carbs}</TableCell>
 										<TableCell align='right'>{row.protein}</TableCell> */}
