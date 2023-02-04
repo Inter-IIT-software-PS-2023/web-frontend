@@ -77,7 +77,7 @@ const SideBarModule = () => {
 							icon={<DeleteForeverIcon />}
 							onClick={async () => {
 								await fetch(
-									'http://ec2-65-0-182-19.ap-south-1.compute.amazonaws.com:8000/orders/clear'
+									'https://growwsimplee.coursepanel.in/orders/clear'
 								)
 									.then(res => {
 										console.log(res)
