@@ -125,7 +125,7 @@ export default function VerticalLinearStepper() {
 									readExcel(e)
 										.then(data => {
 											fetch(
-												'http://ec2-65-0-182-19.ap-south-1.compute.amazonaws.com:8000/orders/new',
+												'https://growwsimplee.coursepanel.in/orders/new',
 												{
 													method: 'POST',
 													body: JSON.stringify(data),
@@ -158,7 +158,7 @@ export default function VerticalLinearStepper() {
 	const GenerateRiders = () => {
 		const riderApi = async () => {
 			await fetch(
-				'http://ec2-65-0-182-19.ap-south-1.compute.amazonaws.com:8000/riders/new'
+				'https://growwsimplee.coursepanel.in/riders/new'
 				// {
 				// 	method: 'POST',
 				// 	headers: {
@@ -252,7 +252,7 @@ export default function VerticalLinearStepper() {
 					sx={{ height: '50px' }}
 					onClick={async () => {
 						await fetch(
-							'http://ec2-65-0-182-19.ap-south-1.compute.amazonaws.com:8000/riders/routing'
+							'https://growwsimplee.coursepanel.in/riders/routing'
 						)
 							.then(res => res.json())
 							.then(res => {

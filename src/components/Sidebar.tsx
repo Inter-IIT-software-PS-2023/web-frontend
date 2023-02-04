@@ -9,7 +9,7 @@ import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
-import { Link,useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import '../styles/Sidebar.css'
 const SidebarMenu = () => {
@@ -56,7 +56,7 @@ const SidebarMenu = () => {
 						icon={<DeleteForeverIcon />}
 						onClick={async () => {
 							await fetch(
-								'http://ec2-65-0-182-19.ap-south-1.compute.amazonaws.com:8000/orders/clear'
+								'https://growwsimplee.coursepanel.in/orders/clear'
 							)
 								.then(res => {
 									console.log(res)
