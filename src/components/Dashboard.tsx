@@ -11,8 +11,8 @@ import SidebarMenu from './Sidebar'
 import LineStyle from './Charts/LineStyle'
 import ColumnPlot from './Charts/ColumnPlot'
 import ProgressChart from './Charts/Progress'
-import "../styles/Home.css";
-import img from "../assets/growsimplee.png"
+import '../styles/Home.css'
+import img from '../assets/growsimplee.png'
 import { useNavigate } from 'react-router-dom'
 const Dashboard = () => {
 	const navigate = useNavigate()
@@ -20,10 +20,13 @@ const Dashboard = () => {
 		<>
 			<SidebarMenu />
 			<section className='home-section'>
-				<nav className='nav-home' onClick={() => {
-					navigate("/");
-				}}>
-					<img src={img} alt="" className='logo-img' />
+				<nav
+					className='nav-home'
+					onClick={() => {
+						navigate('/')
+					}}
+				>
+					<img src={img} alt='' className='logo-img' />
 				</nav>
 				<div className='home-content'>
 					<div className='overview-boxes'>
@@ -204,70 +207,95 @@ const Dashboard = () => {
 										<img src={img9} alt='' />
 										<span className='product'>Vuitton Sunglasses</span>
 									</a>
-									<span className='price'><ProgressChart /></span>
+									<span className='price'>
+										<ProgressChart />
+									</span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img4} alt='' />
 										<span className='product'>Hourglass Jeans </span>
 									</a>
-									<span className='price'><ProgressChart /></span>
+									<span className='price'>
+										<ProgressChart />
+									</span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img5} alt='' />
 										<span className='product'>Nike Sport Shoe</span>
 									</a>
-									<span className='price'><ProgressChart /></span>
+									<span className='price'>
+										<ProgressChart />
+									</span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img6} alt='' />
 										<span className='product'>Hermes Silk Scarves.</span>
 									</a>
-									<span className='price'><ProgressChart /></span>
+									<span className='price'>
+										<ProgressChart />
+									</span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img3} alt='' />
 										<span className='product'>Succi Ladies Bag</span>
 									</a>
-									<span className='price'><ProgressChart /></span>
+									<span className='price'>
+										<ProgressChart />
+									</span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img2} alt='' />
-										<span className='product'>Gucci Womens's Bags</span>
+										<span className='product'>Gucci Womens&#39;s Bags</span>
 									</a>
-									<span className='price'><ProgressChart /></span>
+									<span className='price'>
+										<ProgressChart />
+									</span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img1} alt='' />
 										<span className='product'>Addidas Running Shoe</span>
 									</a>
-									<span className='price'><ProgressChart /></span>
+									<span className='price'>
+										<ProgressChart />
+									</span>
 								</li>
 								<li>
 									<a href='#'>
 										<img src={img8} alt='' />
 										<span className='product'>Bilack Wear&#39;s Shirt</span>
 									</a>
-									<span className='price'><ProgressChart /></span>
+									<span className='price'>
+										<ProgressChart />
+									</span>
 								</li>
 							</ul>
 						</div>
 					</div>
-					<div className="charts">
-						<div className="line">
-							<div className='title' style={{ fontSize: "24px", marginBottom: "10px", fontWeight: "500" }}>Package delivered vs Rider</div>
+					<div className='charts'>
+						<div className='line'>
+							<div
+								className='title'
+								style={{ fontSize: '24px', marginBottom: '10px', fontWeight: '500' }}
+							>
+								Package delivered vs Rider
+							</div>
 							<LineStyle />
 						</div>
-						<div className="line">
-							<div className='title' style={{ fontSize: "24px", marginBottom: "10px", fontWeight: "500" }}>Fake Attempt % vs Rider</div>
+						<div className='line'>
+							<div
+								className='title'
+								style={{ fontSize: '24px', marginBottom: '10px', fontWeight: '500' }}
+							>
+								Fake Attempt % vs Rider
+							</div>
 							<ColumnPlot />
 						</div>
-
 					</div>
 				</div>
 			</section>

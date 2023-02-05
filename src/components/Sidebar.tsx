@@ -8,10 +8,13 @@ import {
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
-import { Link } from 'react-router-dom'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import { Link, useNavigate } from 'react-router-dom'
+
 import '../styles/Sidebar.css'
 const SidebarMenu = () => {
 	const { collapseSidebar } = useProSidebar()
+	const navigate = useNavigate()
 	return (
 		<>
 			<Sidebar
@@ -48,6 +51,23 @@ const SidebarMenu = () => {
 
 					<MenuItem icon={<AnalyticsIcon />} routerLink={<Link to='/dashboard' />}>
 						Dashboard
+					</MenuItem>
+					<MenuItem
+						icon={<DeleteForeverIcon />}
+						onClick={async () => {
+							await fetch(
+								'https://growwsimplee.coursepanel.in/orders/clear'
+							)
+								.then(res => {
+									console.log(res)
+									navigate('/')
+								})
+								.catch(err => {
+									console.log(err)
+								})
+						}}
+					>
+						Clear DB
 					</MenuItem>
 				</Menu>
 			</Sidebar>

@@ -31,7 +31,6 @@ export default function VerticalLinearStepper() {
 	const [feedValidateRider, setFeedValidateRider] = useState(false)
 	const [feedValidateUpload, setFeedValidateUpload] = useState(false)
 	const [genValidateRider, setGenValidateRider] = useState(false)
-	const [riderCount, setRiderCount] = useState(0)
 	const dispatch = useAppDispatch()
 	const GeneralInstruction = () => {
 		return (
@@ -87,10 +86,10 @@ export default function VerticalLinearStepper() {
 						display: 'flex',
 						justifyContent: 'space-around',
 						flexDirection: 'column',
-						height: '120px',
+						height: "300px"
 					}}
 				>
-					<p>Input the excel sheet containing all the order details.</p>
+					<p>The excel sheet containing all the order details for a riders application serves as a comprehensive record of all the deliveries made by the riders. It includes information such as the order number, rider name, delivery date and time, customer information, destination address, and delivery status. This information helps the riders to keep track of their daily deliveries and allows the company to monitor the performance of each rider. With all the order details in one place, it becomes easier to identify any bottlenecks in the delivery process and take corrective measures. The excel sheet also provides a clear picture of the delivery performance over time, which can be used for planning and decision making..</p>
 					<div
 						style={{
 							height: '50px',
@@ -124,13 +123,16 @@ export default function VerticalLinearStepper() {
 									e.preventDefault()
 									readExcel(e)
 										.then(data => {
-											fetch(`${import.meta.env.VITE_BACKEND_URL}/orders/new`, {
-												method: 'POST',
-												body: JSON.stringify(data),
-												headers: {
-													'Content-Type': 'application/json',
-												},
-											})
+											fetch(
+												'https://growwsimplee.coursepanel.in/orders/new',
+												{
+													method: 'POST',
+													body: JSON.stringify(data),
+													headers: {
+														'Content-Type': 'application/json',
+													},
+												}
+											)
 												.then(resp => resp.json())
 												.then(data => {
 													console.log(data)
@@ -153,14 +155,18 @@ export default function VerticalLinearStepper() {
 	}
 
 	const GenerateRiders = () => {
+		const [riderCount, setRiderCount] = useState<Number | null>(null)
 		const riderApi = async () => {
-			await fetch(`${import.meta.env.VITE_BACKEND_URL}/rider/new`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ num: riderCount }),
-			})
+			await fetch(
+				'https://growwsimplee.coursepanel.in/riders/new',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ num: riderCount }),
+				}
+			)
 				.then(() => {
 					setGenValidateRider(true)
 				})
@@ -177,7 +183,8 @@ export default function VerticalLinearStepper() {
 						display: 'flex',
 						justifyContent: 'space-around',
 						flexDirection: 'column',
-						height: '120px',
+						height: '40px',
+						marginTop: '10px',
 					}}
 				>
 					<p>Input the number of riders</p>
@@ -196,15 +203,16 @@ export default function VerticalLinearStepper() {
 								setFeedValidateRider(false)
 								return
 							}
-							setFeedValidateRider(true)
+
 							setRiderCount(parseInt(e.target.value))
+							setFeedValidateRider(true)
 						}}
 						variant='standard'
 					/>
 				</div>
 				<div
 					style={{
-						height: '100%',
+						height: '60%',
 						display: 'flex',
 						justifyContent: 'space-around',
 						flexDirection: 'column',
@@ -215,6 +223,7 @@ export default function VerticalLinearStepper() {
 						operation. A pair of credentials will be generated for each rider which
 						can be use to sign in to the rider app to keep a track of all the orders
 						one has to deliver.
+
 					</p>
 					<Button variant='outlined' sx={{ height: '50px' }} onClick={riderApi}>
 						Generate
@@ -237,13 +246,15 @@ export default function VerticalLinearStepper() {
 				<p>
 					Click on the button to start the last mile delivery operation. This will
 					cluster orders that each rider has to deliver along with the route one has
-					to travel.{' '}
+					to travel.
 				</p>
 				<Button
 					variant='contained'
 					sx={{ height: '50px' }}
 					onClick={async () => {
-						await fetch(`${import.meta.env.VITE_BACKEND_URL}/riders/routing`)
+						await fetch(
+							'https://growwsimplee.coursepanel.in/riders/routing'
+						)
 							.then(res => res.json())
 							.then(res => {
 								dispatch(setRider(res))
@@ -334,7 +345,12 @@ export default function VerticalLinearStepper() {
 								{step.label}
 							</StepLabel>
 							<StepContent>
-								<Typography style={{ height: '55vh' }}>{step.component}</Typography>
+								<Typography style={{
+									height: '55vh',
+									display: "flex",
+									justifyContent: "space-around",
+									flexDirection: "column"
+								}}>{step.component}</Typography>
 								<Box sx={{ mb: 2 }}>
 									<div>
 										<Button

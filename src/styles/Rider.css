@@ -20,6 +20,8 @@
     z-index: 9;
     transition: all 0.5s ease-in-out;
     transform: translateX(-190%);
+    max-height: 100vh;
+    /* overflow: scroll; */
 }
 
 .rider-header {
@@ -37,6 +39,7 @@
     padding: 7px;
     transition: all 0.5s ease-in-out;
     /* z-index: 9; */
+    overflow-y: scroll;
 }
 
 .left-holder {
@@ -66,6 +69,8 @@
 .riders {
     margin-top: 20px;
     transition: all 0.5s ease-in-out;
+    max-height: 100vh;
+    /* overflow: scroll; */
 }
 
 .hide {

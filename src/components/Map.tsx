@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useState, useEffect } from 'react'
-import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import '../styles/MapDisplay.css'
 import '../styles/Marker.css'
 import mapboxgl from 'mapbox-gl'
@@ -18,14 +18,28 @@ import SideBarModule from './SideBarModule'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import InventoryIcon from '@mui/icons-material/Inventory'
 import '../styles/Popper.css'
-import { Button } from '@mui/material'
+import { Box, Button, Modal, TextField, Typography } from '@mui/material'
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 400,
+	bgcolor: 'background.paper',
+	border: '2px solid #000',
+	boxShadow: 24,
+	p: 4,
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+	flexDirection: 'column',
+}
 const Map = () => {
 	const map: any = useRef(null)
 	const mapContainer = useRef<HTMLDivElement>(null)
 	const [marker, setMarker] = useState<any>(null)
 	const [mapState, setMap] = useState<any>(null)
-	const [lat] = useState(77.5946)
-	const [lng] = useState(12.9716)
+
 	const [zoom] = useState(15)
 	const theme = useAppSelector(themeSelector)
 	const currentRider = useAppSelector(riderSelector).currentRider
@@ -34,6 +48,9 @@ const Map = () => {
 	const handleClose = () => {
 		setOpen(!open)
 	}
+	const [openDynamic, setOpenDynamic] = useState(false)
+	const handleOpenDynamic = () => setOpenDynamic(true)
+	const handleCloseDynamic = () => setOpenDynamic(false)
 	const setMarkers = (Riders = riders) => {
 		console.log(Riders)
 		mapboxgl.accessToken =
@@ -41,11 +58,11 @@ const Map = () => {
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current || '',
 			style: theme,
-			center: [lat, lng],
+			center: [77.638725, 12.971599],
 			zoom: zoom,
 		})
 		Riders?.forEach((rider: any, index: number) => {
-			rider.order.forEach((packag: any) => {
+			rider.order?.forEach((packag: any) => {
 				new mapboxgl.Marker({ color: colors[index] })
 					.setLngLat([packag?.address.lng, packag?.address.lat])
 					.setPopup(
@@ -61,12 +78,12 @@ const Map = () => {
 					)
 					.addTo(map.current)
 			})
-			if (rider.order.length > 0) {
+			if (rider.order?.length > 0) {
 				const el = document.createElement('div')
 				el.className = 'marker'
 				el.classList.add('marker')
 				const marker = new mapboxgl.Marker(el)
-					.setLngLat([rider.order[0]?.address.lng, rider.order[0]?.address.lat])
+					.setLngLat([77.638725, 12.971599])
 					.setPopup(
 						new mapboxgl.Popup({ offset: 25 }) // add popups
 							.setHTML(
@@ -114,6 +131,56 @@ const Map = () => {
 			<div className='theme'>
 				<Theme />
 			</div>
+			<div className='dynamic-location'>
+				<Button
+					onClick={handleOpenDynamic}
+					sx={{
+						color: '#000',
+					}}
+				>
+					Dynamic Points
+				</Button>
+				<Modal
+					open={openDynamic}
+					onClose={handleCloseDynamic}
+					aria-labelledby='modal-modal-title'
+					aria-describedby='modal-modal-description'
+				>
+					<Box sx={style}>
+						<Typography
+							id='modal-modal-title'
+							variant='h6'
+							component='h2'
+							sx={{
+								textAlign: 'center',
+							}}
+						>
+							Add Dynamic Points
+						</Typography>
+						<TextField
+							id='filled-multiline-static'
+							label='Address'
+							multiline
+							placeholder='Type..'
+							rows={4}
+							variant='filled'
+							sx={{
+								width: '100%',
+								mt: 2,
+							}}
+						/>
+						<Button
+							variant='outlined'
+							sx={{
+								mt: 2,
+							}}
+							onClick={handleCloseDynamic}
+						>
+							Submit
+						</Button>
+					</Box>
+				</Modal>
+			</div>
 			<div>
 				<div
 					ref={mapContainer}
@@ -124,8 +191,8 @@ const Map = () => {
 			<div
 				style={{
 					position: 'absolute',
-					bottom: '60px',
-					right: '0',
+					bottom: '110px',
+					right: '14px',
 					zIndex: '99999',
 				}}
 			>
@@ -150,13 +217,13 @@ const Map = () => {
 				</Button>
 				<Button
 					variant='contained'
+					onClick={() => handleClose()}
 					sx={{
 						borderRadius: '50%',
 						height: '60px',
 						backgroundColor: 'white',
 						color: 'black',
 					}}
-					onClick={() => handleClose()}
 				>
 					<InventoryIcon />
 				</Button>

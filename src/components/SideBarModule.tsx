@@ -1,7 +1,6 @@
 import SearchBar from 'material-ui-search-bar'
 import { useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import CircleIcon from '@mui/icons-material/Circle'
 import {
 	Sidebar,
 	Menu,
@@ -17,6 +16,7 @@ import { useAppSelector, useAppDispatch } from '../store/app/Hooks'
 import { Rider, riderSelector, setCurrentRider } from '../store/features/Rider'
 import { colors } from '../utils/colors'
 import '../styles/Sidebar.css'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 const SideBarModule = () => {
 	const dispatch = useAppDispatch()
@@ -24,6 +24,7 @@ const SideBarModule = () => {
 	const [clicked, setClicked] = useState(false)
 	const navigate = useNavigate()
 	const Rider = useAppSelector(riderSelector).rider
+	console.log(Rider)
 	return (
 		<div className='left-holder'>
 			<div className='sidebar'>
@@ -73,6 +74,21 @@ const SideBarModule = () => {
 						>
 							Dashboard
 						</MenuItem>
+						<MenuItem
+							icon={<DeleteForeverIcon />}
+							onClick={async () => {
+								await fetch('https://growwsimplee.coursepanel.in/orders/clear')
+									.then(res => {
+										console.log(res)
+										navigate('/')
+									})
+									.catch(err => {
+										console.log(err)
+									})
+							}}
+						>
+							Clear DB
+						</MenuItem>
 					</Menu>
 				</Sidebar>
 			</div>
@@ -93,15 +109,17 @@ const SideBarModule = () => {
 									}}
 								>
 									<AccountCircleIcon />
-									<div className='rider-name'>{rider.rider.username}</div>
-									<div
-										style={{
-											backgroundColor: rider.order.length === 0 ? 'red' : colors[index],
-											width: '20px',
-											height: '20px',
-											borderRadius: '500%',
-										}}
-									></div>
+									<div className='rider-name'>{rider?.rider?.username}</div>
+									{rider?.order.length === 0 ? null : (
+										<div
+											style={{
+												backgroundColor: colors[index],
+												width: '20px',
+												height: '20px',
+												borderRadius: '500%',
+											}}
+										></div>
+									)}
 								</div>
 							)
 						})}
