@@ -1,5 +1,5 @@
 import SearchBar from 'material-ui-search-bar'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import {
 	Sidebar,
@@ -24,6 +24,7 @@ const SideBarModule = () => {
 	const [clicked, setClicked] = useState(false)
 	const navigate = useNavigate()
 	const Rider = useAppSelector(riderSelector).rider
+	console.log(Rider)
 	return (
 		<div className='left-holder'>
 			<div className='sidebar'>
