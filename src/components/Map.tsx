@@ -39,8 +39,7 @@ const Map = () => {
 	const mapContainer = useRef<HTMLDivElement>(null)
 	const [marker, setMarker] = useState<any>(null)
 	const [mapState, setMap] = useState<any>(null)
-	const [lat] = useState(77.5946)
-	const [lng] = useState(12.9716)
+
 	const [zoom] = useState(15)
 	const theme = useAppSelector(themeSelector)
 	const currentRider = useAppSelector(riderSelector).currentRider
@@ -59,7 +58,7 @@ const Map = () => {
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current || '',
 			style: theme,
-			center: [Riders[0]?.order[0]?.address?.lng, Riders[0]?.order[0]?.address?.lat],
+			center: [77.638725, 12.971599],
 			zoom: zoom,
 		})
 		Riders?.forEach((rider: any, index: number) => {
@@ -84,7 +83,7 @@ const Map = () => {
 				el.className = 'marker'
 				el.classList.add('marker')
 				const marker = new mapboxgl.Marker(el)
-					.setLngLat([rider.order[0]?.address.lng, rider.order[0]?.address.lat])
+					.setLngLat([77.638725, 12.971599])
 					.setPopup(
 						new mapboxgl.Popup({ offset: 25 }) // add popups
 							.setHTML(
