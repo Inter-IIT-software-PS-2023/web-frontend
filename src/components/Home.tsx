@@ -283,7 +283,7 @@ export default function VerticalLinearStepper() {
 		},
 		{
 			label: 'Generate Riders',
-			component: <GenerateRiders />,
+			component: GenerateRiders(),
 		},
 		{
 			label: 'Cluster and Deliver',
