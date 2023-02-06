@@ -13,7 +13,8 @@ import { useNavigate } from 'react-router-dom'
 import { setRider } from '../store/features/Rider'
 import { useAppDispatch } from '../store/app/Hooks'
 import * as XLSX from 'xlsx'
-import img from '../assets/growsimplee.png'
+import img from '../assets/growsimplee.png';
+import LoadingCsv from './LoadingCsv';
 export default function VerticalLinearStepper() {
 	const readExcel = async (e: { target: { files: FileList } }) => {
 		const file = e.target.files[0]
@@ -30,7 +31,9 @@ export default function VerticalLinearStepper() {
 	const navigate = useNavigate()
 	const [feedValidateRider, setFeedValidateRider] = useState(false)
 	const [feedValidateUpload, setFeedValidateUpload] = useState(false)
-	const [genValidateRider, setGenValidateRider] = useState(false)
+	const [feedValidateUploadDone, setFeedValidateUploadDone] = useState(false)
+	const [genValidateRider, setGenValidateRider] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const dispatch = useAppDispatch()
 	const GeneralInstruction = () => {
 		return (
@@ -71,6 +74,7 @@ export default function VerticalLinearStepper() {
 	}
 
 	const FeedInput = () => {
+
 		return (
 			<div
 				style={{
@@ -121,6 +125,7 @@ export default function VerticalLinearStepper() {
 								// eslint-disable-next-line @typescript-eslint/no-explicit-any
 								onChange={(e: any) => {
 									e.preventDefault()
+									setFeedValidateUpload(true)
 									readExcel(e)
 										.then(data => {
 											fetch(
@@ -136,13 +141,15 @@ export default function VerticalLinearStepper() {
 												.then(resp => resp.json())
 												.then(data => {
 													console.log(data)
-													setFeedValidateUpload(true)
+													setFeedValidateUpload(false)
+													setFeedValidateUploadDone(true)
 												})
 												.catch(err => console.log(err))
 										})
 										.catch(err => {
 											console.log(err)
-											setFeedValidateUpload(false)
+											setFeedValidateUpload(true)
+											setFeedValidateUploadDone(false)
 										})
 								}}
 							/>
@@ -279,11 +286,11 @@ export default function VerticalLinearStepper() {
 		},
 		{
 			label: 'Feed Input',
-			component: <FeedInput />,
+			component: !feedValidateUpload ? <FeedInput /> : <LoadingCsv />,
 		},
 		{
 			label: 'Generate Riders',
-			component: GenerateRiders(),
+			component: <GenerateRiders />,
 		},
 		{
 			label: 'Cluster and Deliver',
@@ -303,7 +310,7 @@ export default function VerticalLinearStepper() {
 				}
 			}
 		} else if (activeStep === 1) {
-			if (!feedValidateUpload) {
+			if (!feedValidateUploadDone) {
 				alert('Failed to Upload')
 				return
 			}
