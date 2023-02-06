@@ -6,7 +6,7 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import '../styles/MapDisplay.css'
 import '../styles/Marker.css'
 import mapboxgl from 'mapbox-gl'
-import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder'
+import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import RiderModal from './RiderModal'
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike'
 import { Theme } from '../store/features/themeToggle/ToggleTheme'
