@@ -8,11 +8,11 @@ const LoadingCsv = () => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                background: '#f8f8f8',
-                width: "100vw",
-                height: "100vh",
+                // background: '#f8f8f8',
+                width: "100%",
+                height: "100%",
                 zIndex: "99999",
-                backgroundColor: "rgb(220, 220, 220)",
+                // backgroundColor: "rgb(220, 220, 220)",
             }}
         >
             <img src={gif} alt='' />
