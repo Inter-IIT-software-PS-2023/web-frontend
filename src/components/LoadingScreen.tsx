@@ -13,6 +13,7 @@ const LoadingScreen = () => {
 					setMessage('Ready to Go!')
 					setTimeout(() => {
 						navigate('/map')
+						window.location.reload()
 					}, 4000)
 				}, 4000)
 			}, 4000)
