@@ -13,8 +13,8 @@ import { useNavigate } from 'react-router-dom'
 import { setRider } from '../store/features/Rider'
 import { useAppDispatch } from '../store/app/Hooks'
 import * as XLSX from 'xlsx'
-import img from '../assets/growsimplee.png';
-import LoadingCsv from './LoadingCsv';
+import img from '../assets/growsimplee.png'
+import LoadingCsv from './LoadingCsv'
 export default function VerticalLinearStepper() {
 	const readExcel = async (e: { target: { files: FileList } }) => {
 		const file = e.target.files[0]
@@ -32,8 +32,7 @@ export default function VerticalLinearStepper() {
 	const [feedValidateRider, setFeedValidateRider] = useState(false)
 	const [feedValidateUpload, setFeedValidateUpload] = useState(false)
 	const [feedValidateUploadDone, setFeedValidateUploadDone] = useState(false)
-	const [genValidateRider, setGenValidateRider] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [genValidateRider, setGenValidateRider] = useState(false)
 	const dispatch = useAppDispatch()
 	const GeneralInstruction = () => {
 		return (
@@ -74,7 +73,6 @@ export default function VerticalLinearStepper() {
 	}
 
 	const FeedInput = () => {
-
 		return (
 			<div
 				style={{

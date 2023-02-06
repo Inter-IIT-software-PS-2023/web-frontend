@@ -14,7 +14,6 @@ import { useAppSelector, useAppDispatch } from '../store/app/Hooks'
 import {
 	riderSelector,
 	setCurrentRider,
-	setRider,
 } from '../store/features/Rider'
 import { updateRoute } from '../services/mapServices'
 import { themeSelector } from '../store/features/themeToggle/Toggle'
