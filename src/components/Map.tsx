@@ -6,11 +6,15 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import '../styles/MapDisplay.css'
 import '../styles/Marker.css'
 import mapboxgl from 'mapbox-gl'
-import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import MapBoxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import RiderModal from './RiderModal'
+import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike'
 import { Theme } from '../store/features/themeToggle/ToggleTheme'
-import { useAppSelector } from '../store/app/Hooks'
-import { riderSelector } from '../store/features/Rider'
+import { useAppSelector, useAppDispatch } from '../store/app/Hooks'
+import {
+	riderSelector,
+	setCurrentRider,
+} from '../store/features/Rider'
 import { updateRoute } from '../services/mapServices'
 import { themeSelector } from '../store/features/themeToggle/Toggle'
 import { colors } from '../utils/colors'
@@ -48,6 +52,7 @@ const Map = () => {
 	const handleClose = () => {
 		setOpen(!open)
 	}
+	const dispatch = useAppDispatch()
 	const [openDynamic, setOpenDynamic] = useState(false)
 	const handleOpenDynamic = () => setOpenDynamic(true)
 	const handleCloseDynamic = () => setOpenDynamic(false)
@@ -100,7 +105,12 @@ const Map = () => {
 				setMarker(marker)
 			}
 		})
-
+		const house = document.createElement('div')
+		house.className = 'marker-warehouse'
+		house.classList.add('marker-warehouse')
+		new mapboxgl.Marker(house)
+			.setLngLat([77.638725, 12.971599])
+			.addTo(map.current)
 		const search = new MapBoxGeocoder({
 			accessToken: mapboxgl.accessToken,
 			marker: false,
@@ -116,7 +126,6 @@ const Map = () => {
 		// map.current.on('draw.update', updateRoute)
 		setMap(map.current)
 	}
-
 	useEffect(() => {
 		if (currentRider.length === 0) {
 			setMarkers()
@@ -124,6 +133,21 @@ const Map = () => {
 		}
 		setMarkers(currentRider)
 	}, [currentRider, theme])
+	// useEffect(() => {
+	// 	const getData = async () => {
+	// 		await fetch('https://growwsimplee.coursepanel.in/riders/routing')
+	// 			.then(res => res.json())
+	// 			.then(res => {
+	// 				dispatch(setRider(res))
+	// 				dispatch(dispatch(setCurrentRider([])))
+	// 				console.log(res)
+	// 			})
+	// 			.catch(err => {
+	// 				console.log(err)
+	// 			})
+	// 	}
+	// 	getData()
+	// }, [])
 
 	return (
 		<>
@@ -180,6 +204,30 @@ const Map = () => {
 						</Button>
 					</Box>
 				</Modal>
+			</div>
+			<div
+				style={{
+					position: 'absolute',
+					top: '170px',
+					right: '0px',
+					zIndex: '99999',
+				}}
+			>
+				<Button
+					onClick={() => {
+						dispatch(setCurrentRider([]))
+					}}
+					sx={{
+						borderRadius: '50%',
+						height: '60px',
+						width: '60px',
+						backgroundColor: 'white',
+						color: 'black',
+						marginRight: '3px',
+					}}
+				>
+					<DirectionsBikeIcon />
+				</Button>
 			</div>
 			<div>
 				<div
