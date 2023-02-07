@@ -15,6 +15,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../store/app/Hooks'
 import { Rider, riderSelector, setCurrentRider } from '../store/features/Rider'
 import { colors } from '../utils/colors'
+import Tooltip from '@mui/material/Tooltip'
 import '../styles/Sidebar.css'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
@@ -109,7 +110,9 @@ const SideBarModule = () => {
 									}}
 								>
 									<AccountCircleIcon />
-									<div className='rider-name'>{rider?.rider?.username}</div>
+									<Tooltip title={rider?.rider?.password} placement='top'>
+										<div className='rider-name'>{rider?.rider?.username}</div>
+									</Tooltip>
 									{rider?.order.length === 0 ? null : (
 										<div
 											style={{
