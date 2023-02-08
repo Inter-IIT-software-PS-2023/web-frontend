@@ -1,28 +1,18 @@
-import { useState, useEffect } from 'react'
+
 
 import { Line } from '@ant-design/plots'
-
+import { useAppSelector } from '../../store/app/Hooks'
+import { riderSelector } from '../../store/features/Rider'
 const LineStyle = () => {
-	const [data, setData] = useState([])
-
-	useEffect(() => {
-		asyncFetch()
-	}, [])
-
-	const asyncFetch = () => {
-		fetch(
-			'https://gw.alipayobjects.com/os/bmw-prod/c48dbbb1-fccf-4a46-b68f-a3ddb4908b68.json'
-		)
-			.then(response => response.json())
-			.then(json => setData(json))
-			.catch(error => {
-				console.log('fetch data failed', error)
-			})
-	}
+	const riders = useAppSelector(riderSelector)?.rider
+	const data = riders.map(e => ({
+		username: e.rider.username,
+		package: e.order.length,
+	}))
 	const config = {
 		data,
-		xField: 'date',
-		yField: 'value',
+		xField: 'username',
+		yField: 'package',
 		yAxis: {
 			label: {
 				formatter: (v: any) =>
@@ -30,30 +20,9 @@ const LineStyle = () => {
 			},
 		},
 		seriesField: 'type',
-
-		color: ({ type }: { type: any }) => {
-			return type === 'register'
-				? '#F4664A'
-				: type === 'download'
-					? '#30BF78'
-					: '#FAAD14'
-		},
-
-		lineStyle: ({ type }: { type: any }) => {
-			if (type === 'register') {
-				return {
-					lineDash: [4, 4],
-					opacity: 1,
-				}
-			}
-
-			return {
-				opacity: 0.5,
-			}
-		},
 	}
 
-	return <Line {...config as any} />
+	return <Line {...(config as any)} />
 }
 
 export default LineStyle

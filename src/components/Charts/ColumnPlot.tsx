@@ -1,38 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { Column } from '@ant-design/plots';
+import { useAppSelector } from '../../store/app/Hooks'
+import { riderSelector } from '../../store/features/Rider'
+import { Column } from '@ant-design/plots'
+import { useEffect, useState } from 'react'
 
 const ColumnPlot = () => {
-    const [data, setData] = useState([]);
+	const riders = useAppSelector(riderSelector)?.rider
+	const [data, setData] = useState<any>([])
+	useEffect(() => {
+		setData(
+			riders.map(e => ({
+				username: e.rider.username,
+				fake: Math.round((6.2 + Math.round(Math.random() * 200) / 100) * 100) / 100,
+			}))
+		)
+	}, [])
 
-    useEffect(() => {
-        asyncFetch();
-    }, []);
+	const config = {
+		data,
+		xField: 'username',
+		yField: 'fake',
+		xAxis: {
+			label: {
+				autoRotate: false,
+			},
+		},
+		slider: {
+			start: 0.1,
+			end: 0.2,
+		},
+	}
 
-    const asyncFetch = () => {
-        fetch('https://gw.alipayobjects.com/os/bmw-prod/be63e0a2-d2be-4c45-97fd-c00f752a66d4.json')
-            .then((response) => response.json())
-            .then((json) => setData(json))
-            .catch((error) => {
-                console.log('fetch data failed', error);
-            });
-    };
-    const config = {
-        data,
-        xField: '城市',
-        yField: '销售额',
-        xAxis: {
-            label: {
-                autoRotate: false,
-            },
-        },
-        slider: {
-            start: 0.1,
-            end: 0.2,
-        },
-    };
+	return <Column {...config} />
+}
 
-    return <Column {...config} />;
-};
-
-export default ColumnPlot;
+export default ColumnPlot
