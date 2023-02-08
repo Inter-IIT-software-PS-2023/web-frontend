@@ -24,6 +24,7 @@ export default function VerticalLinearStepper() {
 		const jsonData = XLSX.utils.sheet_to_json(worksheet)
 		return new Promise(resolve => {
 			resolve(jsonData)
+			console.log(jsonData)
 			setFeedValidateUpload(true)
 		})
 	}
@@ -262,7 +263,9 @@ export default function VerticalLinearStepper() {
 					variant='contained'
 					sx={{ height: '50px' }}
 					onClick={async () => {
-						await fetch('https://growwsimplee.coursepanel.in/riders/routing', { mode: 'no-cors' })
+						await fetch('https://growwsimplee.coursepanel.in/riders/routing', {
+							mode: 'no-cors',
+						})
 							.then(res => res.json())
 							.then(res => {
 								dispatch(setRider(res))

@@ -1,25 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../app/Store'
+import { Rider } from '../../makeData/geo'
 export interface Rider {
 	id: string
 	riderId: string
 	endTime: number
-	position: {
-		lat: number
-		lng: number
-	}
 	order: Array<{
 		id: string
 		productId: string
 		name: string
 		status: string
 		awb: string
+		isDynamicPoint: boolean
 		reachTime: number
+		deliveryTime: number
+		deliveryLat: number
+		deliveryLng: number
 		clusterId: string
 		address: {
 			id: string
 			address: string
-			location: string
 			lat: number
 			lng: number
 			orderId: string
@@ -29,6 +29,7 @@ export interface Rider {
 		id: string
 		username: string
 		password: string
+		fcmToken: string
 	}
 }
 
@@ -37,7 +38,7 @@ interface RiderState {
 	currentRider: Array<Rider>
 }
 const initialState: RiderState = {
-	rider: [],
+	rider: Rider,
 	currentRider: [],
 }
 

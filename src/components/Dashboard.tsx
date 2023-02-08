@@ -1,11 +1,4 @@
 import '../styles/Dashboard.css'
-import img1 from '../assets/addidas.jpg'
-import img2 from '../assets/bag.jpg'
-import img3 from '../assets/blueBag.jpg'
-import img4 from '../assets/jeans.jpg'
-import img5 from '../assets/nike.jpg'
-import img6 from '../assets/profile.jpg'
-import img8 from '../assets/shirt.jpg'
 import img9 from '../assets/sunglasses.jpg'
 import SidebarMenu from './Sidebar'
 import LineStyle from './Charts/LineStyle'
@@ -14,8 +7,32 @@ import ProgressChart from './Charts/Progress'
 import '../styles/Home.css'
 import img from '../assets/growsimplee.png'
 import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useAppSelector } from '../store/app/Hooks'
+import { riderSelector } from '../store/features/Rider'
+
 const Dashboard = () => {
+	const [onTime, setOneTime] = useState(95.43)
+	const [fake, setfake] = useState(6.23)
+	const riders = useAppSelector(riderSelector)?.rider
+	console.log(riders)
 	const navigate = useNavigate()
+	useEffect(() => {
+		setInterval(() => {
+			if (onTime >= 100) {
+				setOneTime(95.43)
+			} else {
+				setOneTime(Math.round((onTime + Math.random() * 2) * 100) / 100)
+			}
+			if (fake >= 10) {
+				setfake(6.23)
+			} else {
+				setfake(
+					Math.round((fake + Math.round(Math.random() * 200) / 100) * 100) / 100
+				)
+			}
+		}, 4000)
+	}, [])
 	return (
 		<>
 			<SidebarMenu />
@@ -35,164 +52,60 @@ const Dashboard = () => {
 								<div className='box-topic'>Total Order</div>
 								<div className='number'>40,876</div>
 								<div className='indicator'>
-									<i className='bx bx-up-arrow-alt'></i>
-									<span className='text'>Up from yesterday</span>
+									<span className='text'>Today&#39;s count</span>
 								</div>
 							</div>
-							<i className='bx bx-cart-alt cart'></i>
 						</div>
 						<div className='box'>
 							<div className='right-side'>
-								<div className='box-topic'>Total Sales</div>
+								<div className='box-topic'>Total Riders</div>
 								<div className='number'>38,876</div>
-								<div className='indicator'>
-									<i className='bx bx-up-arrow-alt'></i>
-									<span className='text'>Up from yesterday</span>
-								</div>
+								<div className='indicator'></div>
 							</div>
-							<i className='bx bxs-cart-add cart two'></i>
 						</div>
 						<div className='box'>
 							<div className='right-side'>
-								<div className='box-topic'>Total Profit</div>
-								<div className='number'>$12,876</div>
-								<div className='indicator'>
-									<i className='bx bx-up-arrow-alt'></i>
-									<span className='text'>Up from yesterday</span>
-								</div>
+								<div className='box-topic'>Fake delivery %</div>
+								<div className='number'>{fake}%</div>
+								<div className='indicator'></div>
 							</div>
-							<i className='bx bx-cart cart three'></i>
 						</div>
 						<div className='box'>
 							<div className='right-side'>
-								<div className='box-topic'>Total Return</div>
-								<div className='number'>11,086</div>
-								<div className='indicator'>
-									<i className='bx bx-down-arrow-alt down'></i>
-									<span className='text'>Down From Today</span>
-								</div>
+								<div className='box-topic'>On time delivery %</div>
+								<div className='number'>{onTime}%</div>
+								<div className='indicator'></div>
 							</div>
-							<i className='bx bxs-cart-download cart four'></i>
 						</div>
 					</div>
 
 					<div className='sales-boxes'>
 						<div className='recent-sales box'>
-							<div className='title'>Recent Sales</div>
+							<div className='title'>Order Details</div>
 							<div className='sales-details'>
 								<ul className='details'>
-									<li className='topic'>Date</li>
-									<li>
-										<a href='#'>02 Jan 2021</a>
-									</li>
-									<li>
-										<a href='#'>02 Jan 2021</a>
-									</li>
-									<li>
-										<a href='#'>02 Jan 2021</a>
-									</li>
-									<li>
-										<a href='#'>02 Jan 2021</a>
-									</li>
-									<li>
-										<a href='#'>02 Jan 2021</a>
-									</li>
-									<li>
-										<a href='#'>02 Jan 2021</a>
-									</li>
-									<li>
-										<a href='#'>02 Jan 2021</a>
-									</li>
+									<li className='topic'>Product Id</li>
+									{riders[3].order.map((e, key) => (
+										<li key={key}>{e.productId}</li>
+									))}
 								</ul>
 								<ul className='details'>
 									<li className='topic'>Customer</li>
-									<li>
-										<a href='#'>Alex Doe</a>
-									</li>
-									<li>
-										<a href='#'>David Mart</a>
-									</li>
-									<li>
-										<a href='#'>Roe Parter</a>
-									</li>
-									<li>
-										<a href='#'>Diana Penty</a>
-									</li>
-									<li>
-										<a href='#'>Martin Paw</a>
-									</li>
-									<li>
-										<a href='#'>Doe Alex</a>
-									</li>
-									<li>
-										<a href='#'>Aiana Lexa</a>
-									</li>
-									<li>
-										<a href='#'>Rexel Mags</a>
-									</li>
-									<li>
-										<a href='#'>Tiana Loths</a>
-									</li>
+									{riders[3].order.map((e, key) => (
+										<li key={key}>{e.name}</li>
+									))}
 								</ul>
 								<ul className='details'>
-									<li className='topic'>Sales</li>
-									<li>
-										<a href='#'>Delivered</a>
-									</li>
-									<li>
-										<a href='#'>Pending</a>
-									</li>
-									<li>
-										<a href='#'>Returned</a>
-									</li>
-									<li>
-										<a href='#'>Delivered</a>
-									</li>
-									<li>
-										<a href='#'>Pending</a>
-									</li>
-									<li>
-										<a href='#'>Returned</a>
-									</li>
-									<li>
-										<a href='#'>Delivered</a>
-									</li>
-									<li>
-										<a href='#'>Pending</a>
-									</li>
-									<li>
-										<a href='#'>Delivered</a>
-									</li>
+									<li className='topic'>Rider</li>
+									{riders[3].order.map((e, key) => (
+										<li key={key}>{riders[3].rider.username}</li>
+									))}
 								</ul>
 								<ul className='details'>
-									<li className='topic'>Total</li>
-									<li>
-										<a href='#'>$204.98</a>
-									</li>
-									<li>
-										<a href='#'>$24.55</a>
-									</li>
-									<li>
-										<a href='#'>$25.88</a>
-									</li>
-									<li>
-										<a href='#'>$170.66</a>
-									</li>
-									<li>
-										<a href='#'>$56.56</a>
-									</li>
-									<li>
-										<a href='#'>$44.95</a>
-									</li>
-									<li>
-										<a href='#'>$67.33</a>
-									</li>
-									<li>
-										<a href='#'>$23.53</a>
-									</li>
-									<li>
-										<a href='#'>$46.52</a>
-									</li>
+									<li className='topic'>Duration</li>
+									{riders[3].order.map((e, key) => (
+										<li key={key}>{Math.floor(Math.random() * 15 + 1)} mins</li>
+									))}
 								</ul>
 							</div>
 							<div className='button'>
@@ -200,80 +113,19 @@ const Dashboard = () => {
 							</div>
 						</div>
 						<div className='top-sales box'>
-							<div className='title'>Top Seling Product</div>
+							<div className='title'>Rider statistics</div>
 							<ul className='top-sales-details'>
-								<li>
-									<a href='#'>
-										<img src={img9} alt='' />
-										<span className='product'>Vuitton Sunglasses</span>
-									</a>
-									<span className='price'>
-										<ProgressChart />
-									</span>
-								</li>
-								<li>
-									<a href='#'>
-										<img src={img4} alt='' />
-										<span className='product'>Hourglass Jeans </span>
-									</a>
-									<span className='price'>
-										<ProgressChart />
-									</span>
-								</li>
-								<li>
-									<a href='#'>
-										<img src={img5} alt='' />
-										<span className='product'>Nike Sport Shoe</span>
-									</a>
-									<span className='price'>
-										<ProgressChart />
-									</span>
-								</li>
-								<li>
-									<a href='#'>
-										<img src={img6} alt='' />
-										<span className='product'>Hermes Silk Scarves.</span>
-									</a>
-									<span className='price'>
-										<ProgressChart />
-									</span>
-								</li>
-								<li>
-									<a href='#'>
-										<img src={img3} alt='' />
-										<span className='product'>Succi Ladies Bag</span>
-									</a>
-									<span className='price'>
-										<ProgressChart />
-									</span>
-								</li>
-								<li>
-									<a href='#'>
-										<img src={img2} alt='' />
-										<span className='product'>Gucci Womens&#39;s Bags</span>
-									</a>
-									<span className='price'>
-										<ProgressChart />
-									</span>
-								</li>
-								<li>
-									<a href='#'>
-										<img src={img1} alt='' />
-										<span className='product'>Addidas Running Shoe</span>
-									</a>
-									<span className='price'>
-										<ProgressChart />
-									</span>
-								</li>
-								<li>
-									<a href='#'>
-										<img src={img8} alt='' />
-										<span className='product'>Bilack Wear&#39;s Shirt</span>
-									</a>
-									<span className='price'>
-										<ProgressChart />
-									</span>
-								</li>
+								{riders.map((e, key) => (
+									<li key={key}>
+										<a href='#'>
+											<img src={img9} alt='' />
+											<span className='product'>{e?.rider?.username}</span>
+										</a>
+										<span className='price'>
+											<ProgressChart />
+										</span>
+									</li>
+								))}
 							</ul>
 						</div>
 					</div>

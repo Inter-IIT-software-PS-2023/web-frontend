@@ -11,10 +11,7 @@ import RiderModal from './RiderModal'
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike'
 import { Theme } from '../store/features/themeToggle/ToggleTheme'
 import { useAppSelector, useAppDispatch } from '../store/app/Hooks'
-import {
-	riderSelector,
-	setCurrentRider,
-} from '../store/features/Rider'
+import { riderSelector, setCurrentRider } from '../store/features/Rider'
 import { updateRoute } from '../services/mapServices'
 import { themeSelector } from '../store/features/themeToggle/Toggle'
 import { colors } from '../utils/colors'
@@ -46,8 +43,8 @@ const Map = () => {
 
 	const [zoom] = useState(15)
 	const theme = useAppSelector(themeSelector)
-	const currentRider = useAppSelector(riderSelector).currentRider
-	const riders = useAppSelector(riderSelector).rider
+	const currentRider = useAppSelector(riderSelector)?.currentRider
+	const riders = useAppSelector(riderSelector)?.rider
 	const [open, setOpen] = useState(false)
 	const handleClose = () => {
 		setOpen(!open)
@@ -133,21 +130,21 @@ const Map = () => {
 		}
 		setMarkers(currentRider)
 	}, [currentRider, theme])
-	// useEffect(() => {
-	// 	const getData = async () => {
-	// 		await fetch('https://growwsimplee.coursepanel.in/riders/routing')
-	// 			.then(res => res.json())
-	// 			.then(res => {
-	// 				dispatch(setRider(res))
-	// 				dispatch(dispatch(setCurrentRider([])))
-	// 				console.log(res)
-	// 			})
-	// 			.catch(err => {
-	// 				console.log(err)
-	// 			})
-	// 	}
-	// 	getData()
-	// }, [])
+	useEffect(() => {
+		const getData = async () => {
+			await fetch('https://growwsimplee.coursepanel.in/riders/routing', {
+				mode: 'no-cors',
+			})
+				.then(res => res.json())
+				.then(res => {
+					console.log(res)
+				})
+				.catch(err => {
+					console.log(err)
+				})
+		}
+		getData()
+	}, [])
 
 	return (
 		<>

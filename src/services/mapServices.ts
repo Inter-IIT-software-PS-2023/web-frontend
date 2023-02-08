@@ -1,4 +1,4 @@
-import { length, along } from '@turf/turf'
+import { length, along, bearing, lineString, lineSlice } from '@turf/turf'
 import mapboxgl from 'mapbox-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -144,6 +144,35 @@ async function getMatch(
 	marker.setLngLat(route.features[0].geometry.coordinates[0]).addTo(map)
 	function animate() {
 		marker.setLngLat(route.features[0].geometry.coordinates[counter])
+		// const upstreamPoint = along(
+		// 	lineString(route.features[0].geometry.coordinates),
+		// 	length(
+		// 		lineSlice(
+		// 			route.features[0].geometry.coordinates[0],
+		// 			route.features[0].geometry.coordinates[counter],
+		// 			route.features[0].geometry.coordinates
+		// 		)
+		// 	)
+		// )
+		// console.log(upstreamPoint)
+		// console.log(
+		// 	length(
+		// 		lineSlice(
+		// 			route.features[0].geometry.coordinates[0],
+		// 			route.features[0].geometry.coordinates[counter],
+		// 			route.features[0].geometry.coordinates
+		// 		)
+		// 	)
+		// )
+		// const downstreamPoint = along(
+		// 	lineString(route.features[0].geometry.coordinates),
+		// 	lineSlice(
+		// 		route.features[0].geometry.coordinates[0],
+		// 		route.features[0].geometry.coordinates[counter],
+		// 		route.features[0].geometry.coordinates
+		// 	) + 10
+		// )
+		// marker.setBearing(bearing(upstreamPoint, downstreamPoint))
 		counter = counter + 1
 		if (counter < steps) {
 			requestAnimationFrame(animate)

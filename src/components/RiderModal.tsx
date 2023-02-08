@@ -23,7 +23,8 @@ const style = {
 	bgcolor: 'background.paper',
 	boxShadow: 2,
 	p: 4,
-	overflow: 'scroll',
+	overflowY: 'scroll',
+	scrollbarWidth:'thin',
 	zIndex: 999999,
 }
 
