@@ -31,15 +31,15 @@ const LineStyle = () => {
 		},
 		seriesField: 'type',
 
-		color: ({ type }) => {
+		color: ({ type }: { type: any }) => {
 			return type === 'register'
 				? '#F4664A'
 				: type === 'download'
-				? '#30BF78'
-				: '#FAAD14'
+					? '#30BF78'
+					: '#FAAD14'
 		},
-	
-		lineStyle: ({ type }) => {
+
+		lineStyle: ({ type }: { type: any }) => {
 			if (type === 'register') {
 				return {
 					lineDash: [4, 4],
@@ -52,8 +52,8 @@ const LineStyle = () => {
 			}
 		},
 	}
-	
-	return <Line {...config} />
+
+	return <Line {...config as any} />
 }
 
 export default LineStyle
