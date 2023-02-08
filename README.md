@@ -45,3 +45,6 @@ yarn preview
 * To exit the admin portal click on the "Clear DB" button on the sidebar present on left corner of the screen. <br/><br/>
 
 
+* Deployed Link : https://web-frontend-mauve.vercel.app
+
+
