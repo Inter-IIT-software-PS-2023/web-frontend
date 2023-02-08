@@ -1,17 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { Progress } from '@ant-design/plots';
+import React, { useState, useEffect } from 'react'
+import { Progress } from '@ant-design/plots'
 
 const ProgressChart = () => {
-    const config = {
-        height: 40,
-        width: 300,
-        autoFit: false,
-        percent: 0.536,
-        barWidthRatio: 0.3,
-        color: ['#F4664A', '#E8EDF3'],
-    };
-    return <Progress {...config} />;
-};
+	const [config, setConfig] = useState({
+		height: 40,
+		width: 300,
+		autoFit: false,
+		percent: 0.536,
+		barWidthRatio: 0.3,
+	})
+	useEffect(() => {
+		setInterval(() => {
+			setConfig({
+				height: 40,
+				width: 300,
+				autoFit: false,
+				percent: 0.536 + Math.random() * 0.01,
+				barWidthRatio: 0.3,
+			})
+		}, 4000)
+	}, [])
+	return <Progress {...config} />
+}
 
-export default ProgressChart;
+export default ProgressChart
