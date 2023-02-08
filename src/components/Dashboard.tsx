@@ -85,27 +85,27 @@ const Dashboard = () => {
 							<div className='sales-details'>
 								<ul className='details'>
 									<li className='topic'>Product Id</li>
-									{riders[7].order.map((e, key) => (
+									{riders.map((rider) => (rider.order.map((e, key) => (
 										<li key={key}>{e.productId}</li>
-									))}
+									))))}
 								</ul>
 								<ul className='details'>
 									<li className='topic'>Customer</li>
-									{riders[7].order.map((e, key) => (
+									{riders.map((rider) => (rider.order.map((e, key) => (
 										<li key={key}>{e.name}</li>
-									))}
+									))))}
 								</ul>
 								<ul className='details'>
 									<li className='topic'>Rider</li>
-									{riders[7].order.map((e, key) => (
-										<li key={key}>{riders[7].rider.username}</li>
-									))}
+									{riders.map((rider) => (rider.order.map((e, key) => (
+										<li key={key}>{rider.rider.username}</li>
+									))))}
 								</ul>
 								<ul className='details'>
 									<li className='topic'>Duration</li>
-									{riders[7].order.map((e, key) => (
-										<li key={key}>{e.reachTime} mins</li>
-									))}
+									{riders.map((rider) => (rider.order.map((e, key) => (
+										<li key={key}>{e.reachTime}</li>
+									))))}
 								</ul>
 							</div>
 						</div>
