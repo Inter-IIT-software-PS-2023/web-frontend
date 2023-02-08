@@ -151,7 +151,11 @@ export default function VerticalLinearStepper() {
 													setFeedValidateUpload(false)
 													setFeedValidateUploadDone(true)
 												})
-												.catch(err => console.log(err))
+												.catch(err => {
+													setFeedValidateUpload(true)
+													setFeedValidateUploadDone(false)
+													console.log(err)
+												})
 										})
 										.catch(err => {
 											console.log(err)
