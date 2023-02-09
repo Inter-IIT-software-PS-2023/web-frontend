@@ -16,6 +16,8 @@ const Dashboard = () => {
 	const [fake, setfake] = useState(6.23)
 	const riders = useAppSelector(riderSelector)?.rider
 	console.log(riders)
+	const ridersCount = riders.length
+	const orderCount = riders.map(e => e.order.length).reduce((e, a) => e + a)
 	const navigate = useNavigate()
 	useEffect(() => {
 		setInterval(() => {
@@ -50,16 +52,14 @@ const Dashboard = () => {
 						<div className='box'>
 							<div className='right-side'>
 								<div className='box-topic'>Total Order</div>
-								<div className='number'>40,876</div>
-								<div className='indicator'>
-									<span className='text'>Today&#39;s count</span>
-								</div>
+								<div className='number'>{orderCount}</div>
+								<div className='indicator'></div>
 							</div>
 						</div>
 						<div className='box'>
 							<div className='right-side'>
 								<div className='box-topic'>Total Riders</div>
-								<div className='number'>38,876</div>
+								<div className='number'>{ridersCount}</div>
 								<div className='indicator'></div>
 							</div>
 						</div>
@@ -85,37 +85,34 @@ const Dashboard = () => {
 							<div className='sales-details'>
 								<ul className='details'>
 									<li className='topic'>Product Id</li>
-									{riders[3].order.map((e, key) => (
+									{riders.map((rider) => (rider.order.map((e, key) => (
 										<li key={key}>{e.productId}</li>
-									))}
+									))))}
 								</ul>
 								<ul className='details'>
 									<li className='topic'>Customer</li>
-									{riders[3].order.map((e, key) => (
+									{riders.map((rider) => (rider.order.map((e, key) => (
 										<li key={key}>{e.name}</li>
-									))}
+									))))}
 								</ul>
 								<ul className='details'>
 									<li className='topic'>Rider</li>
-									{riders[3].order.map((e, key) => (
-										<li key={key}>{riders[3].rider.username}</li>
-									))}
+									{riders.map((rider) => (rider.order.map((e, key) => (
+										<li key={key}>{rider.rider.username}</li>
+									))))}
 								</ul>
 								<ul className='details'>
 									<li className='topic'>Duration</li>
-									{riders[3].order.map((e, key) => (
-										<li key={key}>{Math.floor(Math.random() * 15 + 1)} mins</li>
-									))}
+									{riders.map((rider) => (rider.order.map((e, key) => (
+										<li key={key}>{e.reachTime}</li>
+									))))}
 								</ul>
-							</div>
-							<div className='button'>
-								<a href='#'>See All</a>
 							</div>
 						</div>
 						<div className='top-sales box'>
 							<div className='title'>Rider statistics</div>
 							<ul className='top-sales-details'>
-								{riders.map((e, key) => (
+								{riders.slice(1, 8).map((e, key) => (
 									<li key={key}>
 										<a href='#'>
 											<img src={img9} alt='' />

@@ -80,7 +80,7 @@ const SideBarModule = () => {
 							onClick={async () => {
 								await fetch('https://growwsimplee.coursepanel.in/orders/clear')
 									.then(res => {
-										console.log(res)
+										console.log(res);
 										localStorage.removeItem("token");
 										navigate('/login')
 									})
