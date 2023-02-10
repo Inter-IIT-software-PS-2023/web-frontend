@@ -1,4 +1,4 @@
-import '../styles/Dashboard.css'
+import '../styles/Dashboard.css';
 import img9 from '../assets/sunglasses.jpg'
 import SidebarMenu from './Sidebar'
 import LineStyle from './Charts/LineStyle'
