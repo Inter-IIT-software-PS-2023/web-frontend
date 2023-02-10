@@ -8,6 +8,7 @@ import {
 	useProSidebar,
 	sidebarClasses,
 } from 'react-pro-sidebar'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
@@ -25,7 +26,6 @@ const SideBarModule = () => {
 	const [clicked, setClicked] = useState(false)
 	const navigate = useNavigate()
 	const Rider = useAppSelector(riderSelector).rider
-	console.log(Rider)
 	return (
 		<div className='left-holder'>
 			<div className='sidebar'>
@@ -76,12 +76,21 @@ const SideBarModule = () => {
 							Dashboard
 						</MenuItem>
 						<MenuItem
+							icon={<AutoAwesomeIcon />}
+							onClick={() => {
+								setClicked(false)
+								navigate('/order')
+							}}
+						>
+							Orders
+						</MenuItem>
+						<MenuItem
 							icon={<DeleteForeverIcon />}
 							onClick={async () => {
 								await fetch('https://growwsimplee.coursepanel.in/orders/clear')
 									.then(res => {
-										console.log(res);
-										localStorage.removeItem("token");
+										console.log(res)
+										localStorage.removeItem('token')
 										navigate('/login')
 									})
 									.catch(err => {

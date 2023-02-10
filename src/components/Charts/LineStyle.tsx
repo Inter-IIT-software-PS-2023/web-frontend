@@ -1,5 +1,3 @@
-
-
 import { Line } from '@ant-design/plots'
 import { useAppSelector } from '../../store/app/Hooks'
 import { riderSelector } from '../../store/features/Rider'
